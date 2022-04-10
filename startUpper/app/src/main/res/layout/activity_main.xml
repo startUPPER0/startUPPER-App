@@ -11,7 +11,7 @@
         tools:context=".MainActivity">
 
         <View
-            android:id="@+id/lightWave"
+            android:id="@+id/lightWavee"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:background="@drawable/ic_wave"
