@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <View
-        android:id="@+id/lightWavee"
+        android:id="@+id/lightWave"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@drawable/ic_wave"
@@ -28,11 +28,10 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="127dp"
-        android:background="#0078C8"
+        android:background="#039be5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/login"
