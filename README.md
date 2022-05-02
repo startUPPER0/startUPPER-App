@@ -7,6 +7,8 @@
 
 #### In the recent future we plan to complete front-end and write the back-end to control user data. We plan to use django for the back-end. 
 
+###### email = "startupper@gmail.com"  passw = "erdinc0808" for static values of login test  
+        
 
 These are figma mockups of our project :
 
