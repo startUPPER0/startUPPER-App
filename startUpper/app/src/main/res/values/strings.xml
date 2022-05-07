@@ -9,5 +9,15 @@
         <item>July Main liked your idea</item>
     </string-array>
 
-    <string name="a">aaaaa</string>
+    <string-array name="contactNames">
+        <item>Bahadır</item>
+        <item>Zeynep</item>
+        <item>Joseph</item>
+    </string-array>
+
+    <string-array name="lastMessages">
+        <item>So when are we going to meet ?</item>
+        <item>I would want to talk about your idea</item>
+        <item>Thanks for your opinion!</item>
+    </string-array>
 </resources>
