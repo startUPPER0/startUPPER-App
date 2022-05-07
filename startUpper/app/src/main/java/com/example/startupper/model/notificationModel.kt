@@ -1,4 +1,4 @@
 package com.example.startupper.model
 
-class notificationModel {
+ data class notificationModel(val stringResourceId:Int) {
 }
