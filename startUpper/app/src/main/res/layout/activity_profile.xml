@@ -18,68 +18,65 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:layout_marginTop="30dp"
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:text="Yaşar Burcu Açan"
+        android:layout_marginTop="30dp"
+        android:background="@color/blueLight"
+        android:textColor="#0A3E60"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView"
-        android:background="@color/blueLight"
-        android:textColor="#0A3E60"
-        ></TextView>
+        tools:text="Yaşar Burcu Açan"></TextView>
 
     <TextView
         android:id="@+id/nameandsurname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/name"
-        app:layout_constraintBottom_toTopOf="@id/descriptonID"
-        android:text="burcuacan@gmail.com"
-        android:textSize="25dp"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
-        ></TextView>
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@id/descriptonID"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name"
+        tools:text="burcuacan@gmail.com"></TextView>
 
     <TextView
         android:id="@+id/descriptonID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/nameandsurname"
-        app:layout_constraintBottom_toTopOf="@+id/descripton"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="About Me"
-        android:textSize="25dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
         android:background="@color/blueLight"
+        android:text="About Me"
         android:textColor="#0A3E60"
-></TextView>
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/descripton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameandsurname"></TextView>
+
     <TextView
         android:id="@+id/descripton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/descriptonID"
-        android:text="Akdeniz Üniversitesinde bilgisayar müdenisliğinde okuyorum. 2. Sınıf öğrencisiyim.
+        tools:text="Akdeniz Üniversitesinde bilgisayar müdenisliğinde okuyorum. 2. Sınıf öğrencisiyim.
 Burdurluyum Antalyada okuyorum. CSS, Javascript, Java, C gibi dillere hakimim.
-B1+ ingilizce seviyorum."
-        android:textSize="20dp"
-       android:layout_marginTop="20dp"
-        android:layout_marginLeft="30dp"
-        />
+B1+ ingilizce seviyorum." />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/descripton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="START NEW BUSINESS"
         android:layout_marginTop="30dp"
+        android:text="START NEW BUSINESS"
         android:textColor="#0A3E60"
-        ></Button>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descripton"></Button>
 </androidx.constraintlayout.widget.ConstraintLayout>
