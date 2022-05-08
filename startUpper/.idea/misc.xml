@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/layout/activity_chats.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/item_chat.xml" value="0.5" />
       </map>
     </option>
   </component>
