@@ -7,11 +7,14 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.navigation.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Login : AppCompatActivity() {
     final lateinit var email: String
     final lateinit var passw: String
     lateinit var edittextMail: EditText
+    lateinit var bottomNavigationView: BottomNavigationView
     lateinit var edittextPassw: EditText
     lateinit var loginButton: Button
     override fun onCreate(savedInstanceState: Bundle?) {
