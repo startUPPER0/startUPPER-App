@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/gnrls/Desktop/a/cse234-2022-term-project-team15/startUpper/app/src/main/res/drawable/custom_rectangle.xml" value="0.218" />
+        <entry key="..\:/Users/gnrls/Desktop/a/cse234-2022-term-project-team15/startUpper/app/src/main/res/drawable/rectangle_profile.xml" value="0.218" />
+        <entry key="..\:/Users/gnrls/Desktop/a/cse234-2022-term-project-team15/startUpper/app/src/main/res/drawable/shadow_profile.xml" value="0.218" />
         <entry key="..\:/Users/gnrls/Desktop/a/cse234-2022-term-project-team15/startUpper/app/src/main/res/layout/activity_feed.xml" value="0.264" />
-        <entry key="..\:/Users/gnrls/Desktop/a/cse234-2022-term-project-team15/startUpper/app/src/main/res/layout/activity_profile.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/gnrls/Desktop/a/cse234-2022-term-project-team15/startUpper/app/src/main/res/layout/activity_profile.xml" value="0.264" />
+        <entry key="..\:/Users/gnrls/Desktop/a/cse234-2022-term-project-team15/startUpper/app/src/main/res/layout/profiletoolbar.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/gnrls/Desktop/a/cse234-2022-term-project-team15/startUpper/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/gnrls/Desktop/a/cse234-2022-term-project-team15/startUpper/app/src/main/res/menu/profile_menu.xml" value="0.27447916666666666" />
       </map>
     </option>
   </component>
