@@ -17,7 +17,6 @@ class chatsRecyclerAdapter(val context : Context,
     class chatsViewHolder(val itemView :View) : RecyclerView.ViewHolder(itemView){
         val contactName : TextView = itemView.findViewById(R.id.contactName)
         val lastMessage : TextView = itemView.findViewById(R.id.lastMessage)
-        val pp : CircleImageView = itemView.findViewById(R.id.contactProfilePicture)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): chatsViewHolder {
@@ -27,7 +26,6 @@ class chatsRecyclerAdapter(val context : Context,
 
     override fun onBindViewHolder(holder: chatsViewHolder, position: Int) {
         val item = dataList[position]
-
         holder.contactName.text = context.resources.getString(item.contactNameResourceId)
         holder.lastMessage.text = context.resources.getString(item.lastMessageResourceId)
     }

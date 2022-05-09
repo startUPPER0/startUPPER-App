@@ -15,13 +15,12 @@ class dataSource {
         return  list
     }
 
-    fun loadChatsModel(): List<chatsModel>{
-        val chatContactsArray : Array<Int> = arrayOf(R.array.contactNames)
-        val lastMessagesArray : Array<Int> = arrayOf(R.array.lastMessages)
-        val list : MutableList<chatsModel> = mutableListOf()
-        for(n in chatContactsArray.indices){
-            list.add(chatsModel(chatContactsArray[n],lastMessagesArray[n]))
-        }
-        return  list
+    fun loadChatsModel(): MutableList<chatsModel>{
+        return mutableListOf<chatsModel>(
+            chatsModel(R.string.person1,R.string.msg1),
+            chatsModel(R.string.person2,R.string.msg2),
+            chatsModel(R.string.person3,R.string.msg3)
+        )
+
     }
 }

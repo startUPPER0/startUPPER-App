@@ -8,15 +8,14 @@
         <item>Lauren Ludwig liked your idea</item>
     </string-array>
 
-    <string-array name="contactNames">
-        <item>Bahadır</item>
-        <item>Zeynep</item>
-        <item>Joseph</item>
-    </string-array>
 
-    <string-array name="lastMessages">
-        <item>So when are we going to meet ?</item>
-        <item>I would want to talk about your idea</item>
-        <item>Thanks for your opinion!</item>
-    </string-array>
+
+    <string name="person1">Bahadır</string>
+    <string name="person2">Zeynep</string>
+    <string name="person3">Joseph</string>
+
+
+    <string name="msg1">So when are we going to meet ?</string>
+    <string name="msg2">I would want to talk about your idea</string>
+    <string name="msg3">Thanks for your opinion!</string>
 </resources>

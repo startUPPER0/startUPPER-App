@@ -1,4 +1,7 @@
 package com.example.startupper.model
 
-data class chatsModel(val contactNameResourceId:Int, val lastMessageResourceId:Int) {
+import androidx.annotation.StringRes
+
+data class chatsModel(@StringRes val contactNameResourceId:Int,
+                      @StringRes val lastMessageResourceId:Int) {
 }
