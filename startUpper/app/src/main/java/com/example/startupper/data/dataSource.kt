@@ -6,13 +6,16 @@ import com.example.startupper.model.chatsModel
 import com.example.startupper.model.notificationModel
 
 class dataSource {
-    fun loadNotificationModel(): List<notificationModel>{
-        val notificationArray : Array<Int> = arrayOf(R.array.notificationList)
-        val list : MutableList<notificationModel> = mutableListOf()
-        for(n in notificationArray.indices){
-            list.add(notificationModel(notificationArray[n]))
-        }
-        return  list
+    fun loadNotificationModel(): MutableList<notificationModel>{
+
+        return  mutableListOf<notificationModel>(
+
+            notificationModel(R.string.not1),
+            notificationModel(R.string.not2),
+            notificationModel(R.string.not3),
+            notificationModel(R.string.not4)
+
+                )
     }
 
     fun loadChatsModel(): MutableList<chatsModel>{

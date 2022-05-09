@@ -33,6 +33,10 @@
             </intent-filter>
 
         </activity>
+        <activity android:name=".Notification"
+            android:exported="false">
+
+        </activity>
     </application>
 
 </manifest>

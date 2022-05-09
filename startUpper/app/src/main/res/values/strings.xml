@@ -1,12 +1,11 @@
 <resources>
     <string name="app_name">startUpper</string>
 
-    <string-array name="notificationList">
-        <item>You hava a message from Jason Kelly</item>
-        <item>Jason Kelly liked your idea</item>
-        <item>You have a message from Lauren Ludwig</item>
-        <item>Lauren Ludwig liked your idea</item>
-    </string-array>
+    <string name="not1">You hava a message from Jason Kelly</string>
+    <string name="not2">Jason Kelly liked your idea</string>
+    <string name="not3">You have a message from Lauren Ludwig</string>
+    <string name="not4">Lauren Ludwig liked your idea</string>
+
 
 
 
