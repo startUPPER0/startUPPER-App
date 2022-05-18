@@ -12,7 +12,7 @@
 
 These are figma mockups of our project :
 
-![midReportItem1](https://raw.githubusercontent.com/akdenizcse/cse234-2022-term-project-team15/main/personalRes/figma.png?token=GHSAT0AAAAAABUVUBWID3HEQ7RHRJE2EI76YUELH3Q)
+![midReportItem1](https://raw.githubusercontent.com/akdenizcse/cse234-2022-term-project-team15/8fe242d0fe35de837540d804e2c07bcebba2ed0b/personalRes/figma.png?token=GHSAT0AAAAAABUVUBWIPAWTAIHQR4AMCWU2YUE3KVA)
 
 
 To see the mockups in more detail click [mockups](https://www.figma.com/team_invite/redeem/ZzxTxNvrgjhMdPdLA53Oof)
