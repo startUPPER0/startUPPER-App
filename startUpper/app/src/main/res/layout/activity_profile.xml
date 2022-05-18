@@ -90,13 +90,33 @@
 Burdurluyum Antalyada okuyorum. CSS, Javascript, Java, C gibi dillere hakimim.
 B1+ ingilizce biliyorum." />
 
-    <Button
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:backgroundTint="@color/white"
-        android:padding="10dp"
-        android:text="START NEW BUSINESS"
-        android:textColor="#212121"></Button>
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/startNewBussinessBT"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/white"
+            android:padding="10dp"
+            android:text="START NEW BUSINESS"
+            android:textColor="#212121"></Button>
+
+        <Button
+         android:id="@+id/manageInterestBT"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/white"
+            android:padding="10dp"
+            android:text="Manage Interests"
+            android:textColor="#212121"></Button>
+
+    </LinearLayout>
+
 </LinearLayout>

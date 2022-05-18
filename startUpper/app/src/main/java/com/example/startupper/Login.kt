@@ -1,63 +1,71 @@
 package com.example.startupper
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
+import android.util.Log
 import android.widget.Toast
-import androidx.navigation.findNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.startupper.databinding.ActivityLoginBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class Login : AppCompatActivity() {
-    final lateinit var email: String
-    final lateinit var passw: String
-    lateinit var edittextMail: EditText
-    lateinit var bottomNavigationView: BottomNavigationView
-    lateinit var edittextPassw: EditText
-    lateinit var loginButton: Button
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-        email = "startupper@gmail.com"
-        passw = "erdinc0808"
-        edittextMail = findViewById(R.id.email)
-        edittextPassw = findViewById(R.id.password)
-        loginButton = findViewById(R.id.loginButton)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        auth = Firebase.auth
+        isSomeoneLogIn()
+        binding.loginButton.setOnClickListener {
+            var email: String = binding.email.text.toString()
+            var password: String = binding.password.text.toString()
+            if (email.isNotEmpty() && password.isNotEmpty())
+                signInForListener(email, password)
 
-        loginButton.setOnClickListener {
-            logInMethod()
         }
+        binding.signupButton.setOnClickListener {
+            startActivity(Intent(this@Login, Profile::class.java))
+            finish()
 
-
+        }
     }
 
-    fun logInMethod() {
+    private fun isSomeoneLogIn() {
+        var currentUser = auth.currentUser
+        if (currentUser != null) {
+            startActivity(Intent(this@Login, FeedActivity::class.java))
+            finish()
+        }
+    }
 
-        var emailEntered = edittextMail.text.toString()
-        var passwEntered = edittextPassw.text.toString()
-        if (emailEntered.equals(email)) {
-            if (passwEntered.equals(passw)) {
-                Toast.makeText(this, "Welcome", Toast.LENGTH_SHORT).show()
-
-                val intentFeed = Intent(this, FeedActivity::class.java)
-
-                startActivity(intentFeed)
-            } else if (passwEntered.equals("")) {
-                Toast.makeText(this, "Please Enter Your Password", Toast.LENGTH_SHORT).show()
-
-            } else {
-                Toast.makeText(this, "Wrong Password", Toast.LENGTH_SHORT).show()
+    private fun signInForListener(email: String, password: String) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(ContentValues.TAG, "signInWithEmail:success")
+                    val user = auth.currentUser
+                    startActivity(Intent(this@Login, FeedActivity::class.java))
+                    finish()
+                    //updateUI(user)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    // updateUI(null)
+                }
             }
-        } else if (emailEntered.equals("")) {
-            Toast.makeText(this, "Please Enter Your e-mail", Toast.LENGTH_SHORT).show()
-
-        } else {
-            Toast.makeText(this, "User Not Found", Toast.LENGTH_SHORT).show()
-
-        }
-
-
     }
+
+
 }
+
+

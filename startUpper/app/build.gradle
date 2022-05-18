@@ -6,11 +6,16 @@ buildscript {
 plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
+task prepareKotlinBuildScriptModel {
 
+}
 android {
     compileSdk 32
-
+    buildFeatures {
+        viewBinding true
+    }
     defaultConfig {
         applicationId "com.example.startupper"
         minSdk 26
@@ -37,7 +42,11 @@ android {
 }
 
 dependencies {
-
+    implementation 'com.google.firebase:firebase-storage-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation platform('com.google.firebase:firebase-bom:30.0.1')
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.6.0'
