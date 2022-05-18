@@ -28,9 +28,8 @@ class Login : AppCompatActivity() {
                 signInForListener(email, password)
 
         }
-        binding.signupButton.setOnClickListener {
-            startActivity(Intent(this@Login, Profile::class.java))
-            finish()
+        binding.signUpText.setOnClickListener {
+            startActivity(Intent(this@Login, Signup::class.java))
 
         }
     }
