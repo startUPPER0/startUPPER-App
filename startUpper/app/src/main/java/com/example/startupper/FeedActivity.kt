@@ -81,6 +81,7 @@ class FeedActivity : AppCompatActivity() {
                         for (z in y.children) {
                             var businessname =
                                 z.child("businessName").getValue().toString()
+
                             Log.e("AAAAA1", businessname)
                             var location =
                                 z.child("location").getValue().toString()
