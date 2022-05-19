@@ -1,6 +1,6 @@
 package com.example.startupper
 
-class UserRegisterClass(
+data class UserRegisterClass(
     var name : String,
     var surname : String,
     var email : String,

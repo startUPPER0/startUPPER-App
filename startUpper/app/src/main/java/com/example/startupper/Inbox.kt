@@ -3,34 +3,32 @@ package com.example.startupper
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
-import com.example.startupper.adapter.notificationRecylerAdapter
-import com.example.startupper.data.dataSource
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class Notification : AppCompatActivity() {
+
+class Inbox : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_notification)
+        setContentView(R.layout.activity_inbox)
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomNavigationView.setSelectedItemId(R.id.notificationBottomMenu)
+        bottomNavigationView.setSelectedItemId(R.id.inboxBottomMenu)
 
         bottomNavigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.feedBottomMenu -> {
-                    startActivity(Intent(this@Notification, FeedActivity::class.java))
+                    startActivity(Intent(this@Inbox, FeedActivity::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.profileBottomMenu -> {
-                    startActivity(Intent(this@Notification, Profile::class.java))
+                    startActivity(Intent(this@Inbox, Profile::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.inboxBottomMenu -> {
-                    startActivity(Intent(this@Notification, Inbox::class.java))
+                R.id.notificationBottomMenu -> {
+                    startActivity(Intent(this@Inbox, Notification::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
