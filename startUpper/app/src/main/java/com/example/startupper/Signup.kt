@@ -1,9 +1,8 @@
 package com.example.startupper
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
-import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import com.example.startupper.databinding.ActivitySignupBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -24,6 +23,9 @@ class Signup : AppCompatActivity() {
         auth = Firebase.auth
 
         database = Firebase.database.reference
+        binding.link.setOnClickListener{
+            startActivity(Intent(this@Signup, Login::class.java))
+        }
 
         binding.signUpButton.setOnClickListener {
             var name = binding.nameText.text.toString().trim()
@@ -32,7 +34,7 @@ class Signup : AppCompatActivity() {
             var date = binding.dateText.text.toString().trim()
             var location = binding.locationText.text.toString().trim()
             var password = binding.passwordText.text.toString().trim()
-            Log.v("test", "$name $surname $email")
+
 
             if(name==""){
                 binding.nameText.setError("Name is required")
@@ -69,6 +71,8 @@ class Signup : AppCompatActivity() {
                 binding.passwordText.requestFocus()
                 return@setOnClickListener
             }
+
+            startActivity(Intent(this@Signup, Login::class.java))
         }
 
 
