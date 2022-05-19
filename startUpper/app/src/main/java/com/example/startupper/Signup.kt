@@ -1,13 +1,17 @@
 package com.example.startupper
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.startupper.databinding.ActivitySignupBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -20,6 +24,7 @@ class Signup : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        var database  = FirebaseDatabase.getInstance().reference
         auth = Firebase.auth
 
         database = Firebase.database.reference
@@ -28,6 +33,7 @@ class Signup : AppCompatActivity() {
         }
 
         binding.signUpButton.setOnClickListener {
+
             var name = binding.nameText.text.toString().trim()
             var surname = binding.surnameText.text.toString().trim()
             var email = binding.emailText.text.toString().trim()
@@ -72,7 +78,24 @@ class Signup : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            startActivity(Intent(this@Signup, Login::class.java))
+
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        Log.d(TAG, "createUserWithEmail:success")
+                        val user = auth.currentUser
+                        Toast.makeText(baseContext, "Welcome!", Toast.LENGTH_SHORT).show()
+                        auth.currentUser?.let { it1 -> database.child("Users").child(it1.uid).
+                            setValue(UserRegisterClass(name,surname,email,date,location,password)) }
+                        startActivity(Intent(this@Signup, Login::class.java))
+                    } else {
+                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                        Toast.makeText(baseContext, "Email already used!", Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+
         }
 
 
