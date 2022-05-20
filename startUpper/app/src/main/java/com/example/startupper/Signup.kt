@@ -1,6 +1,7 @@
 package com.example.startupper
 
 import android.Manifest
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -10,6 +11,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.util.Patterns
+import android.widget.Button
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -28,10 +30,16 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.Year
 import java.util.*
 
 
 class Signup : AppCompatActivity() {
+    private lateinit var dialog :DatePickerDialog
+    private lateinit var dateButton :Button
     private lateinit var binding: ActivitySignupBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
@@ -42,23 +50,99 @@ class Signup : AppCompatActivity() {
     var profilePicture: Uri? = null
     private lateinit var currentUser: FirebaseUser
     private lateinit var currentUserId: String
+
+
+
+
+    private fun getTodaysDate():String{
+        val cal :Calendar = Calendar.getInstance()
+        val year = cal.get(Calendar.YEAR)
+        var month = cal.get(Calendar.MONTH)
+        month+=1
+        val day = cal.get(Calendar.DAY_OF_MONTH)
+        return makeDateString(day, month ,year)
+
+    }
+
+
+    private fun initDatePicker() {
+        var  dateSetListener= DatePickerDialog.OnDateSetListener { datePicker, year:Int, month:Int, day:Int ->
+            var monthh = month+1
+            var date : String = makeDateString(day,monthh,year)
+            dateButton.setText(date)
+        }
+
+        var year:Int = Calendar.YEAR
+        var month:Int = Calendar.MONTH
+        var day :Int = Calendar.DAY_OF_MONTH
+
+        var style =AlertDialog.THEME_HOLO_LIGHT
+        dialog = DatePickerDialog(this,style,dateSetListener,year,month,day)
+
+    }
+
+    private fun openDatePicker(){
+        dialog.show()
+    }
+
+
+    private  fun makeDateString(day:Int,month:Int,year:Int): String {
+        return getMonthFormat(month) + "/" + day + "/" + year
+    }
+
+    private fun getMonthFormat(month:Int):String{
+        if(month==1)
+            return "JAN"
+        if(month==2)
+            return "FEB"
+        if(month==3)
+            return "MAR"
+        if(month==4)
+            return "APR"
+        if(month==5)
+            return "MAY"
+        if(month==6)
+            return "JUN"
+        if(month==7)
+            return "JUL"
+        if(month==8)
+            return "AUG"
+        if(month==9)
+            return "SEP"
+        if(month==10)
+            return "OCT"
+        if(month==11)
+            return "NOV"
+        if(month==12)
+            return "DEC"
+        return "JAN"
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        initDatePicker()
+        dateButton = findViewById(R.id.dateButton)
+        dateButton.setText(getTodaysDate())
+
         var database = FirebaseDatabase.getInstance().reference
 
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         auth = Firebase.auth
         registerLaunchers()
         storage = Firebase.storage
         val reference = storage.reference
         database = Firebase.database.reference
+
+
+        binding.dateButton.setOnClickListener {
+            openDatePicker()
+            initDatePicker()
+        }
+
         binding.link.setOnClickListener {
             startActivity(Intent(this@Signup, Login::class.java))
         }
@@ -70,10 +154,7 @@ class Signup : AppCompatActivity() {
             var name = binding.nameText.text.toString().trim()
             var surname = binding.surnameText.text.toString().trim()
             var email = binding.emailText.text.toString().trim()
-            var date = binding.dateText
-            val datee = DatePickerDialog(this,DatePickerDialog.OnDateSetListener { picker, mYear:Int, mMonth:Int, mDay:Int ->
-                date.setText(""+mDay+"/"+mMonth+"/"+mYear)
-            },year,month,day)
+            var date = binding.dateButton.text.toString().trim()
 
             var location = binding.locationText.text.toString().trim()
             var password = binding.passwordText.text.toString().trim()
@@ -144,7 +225,7 @@ class Signup : AppCompatActivity() {
                                     name,
                                     surname,
                                     email,
-                                    datee.toString().trim(),
+                                    date,
                                     location,
                                     password,
                                     userType,
