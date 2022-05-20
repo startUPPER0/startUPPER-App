@@ -14,7 +14,7 @@
         android:background="@drawable/ic_wave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view"/>
+        app:layout_constraintTop_toBottomOf="@+id/viewLogin"/>
 
     <View
         android:id="@+id/darkWaveeS"
@@ -23,10 +23,10 @@
         android:background="@drawable/ic_wave_dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintTop_toBottomOf="@+id/viewLogin" />
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/viewLogin"
         android:layout_width="match_parent"
         android:layout_height="127dp"
         android:background="#039be5"

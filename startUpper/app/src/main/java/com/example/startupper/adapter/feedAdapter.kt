@@ -5,17 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startupper.NewBusinessClass
 import com.example.startupper.R
+import com.squareup.picasso.Picasso
 
-class feedAdaptor(var feedlist: MutableList<NewBusinessClass>) :
-    RecyclerView.Adapter<feedAdaptor.ViewHolder>() {
+class feedAdapter(var feedlist: MutableList<NewBusinessClass>) :
+    RecyclerView.Adapter<feedAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val businessname: TextView = view.findViewById(R.id.projectNameTextview)
         val location: TextView = view.findViewById(R.id.businessLocationTextview)
         val desc: TextView = view.findViewById(R.id.businessdescTextview)
-        //  val contactDeleteIV: ImageView = view.findViewById(R.id.layoutContactDeleteIV)
+        var imageBusiness: ImageView = view.findViewById(R.id.businessFeedImage)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,6 +36,8 @@ class feedAdaptor(var feedlist: MutableList<NewBusinessClass>) :
         holder.businessname.text = feed.businessName
         holder.location.text = feed.location
         holder.desc.text = feed.description
+        Picasso.get().load(feed.imageuri).into(holder.imageBusiness)
+
     }
 
     override fun getItemCount(): Int {

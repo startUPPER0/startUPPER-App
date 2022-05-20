@@ -20,7 +20,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -66,13 +69,26 @@ class NewBussinessActivity : AppCompatActivity() {
         var businessName = binding.businessName.text.toString()
         var location = binding.location.text.toString()
         var desc = binding.descripton.text.toString()
-        var nb = NewBusinessClass(businessName, location, desc)
+        var nb = NewBusinessClass(businessName, location, desc, "")
+
         val reference = storage.reference
         database = Firebase.database.reference
 
         val imageReference =
             reference.child("feedPicture").child(currentUserId).child(nb.businessName)
-                .putFile(businessPicture!!)
+                .putFile(businessPicture!!).addOnSuccessListener {
+                    val imagereference =
+                        reference.child("feedPicture").child(currentUserId).child(nb.businessName)
+                    imagereference.downloadUrl.addOnSuccessListener {
+                        val downloadUri = it.toString()
+                        nb.imageuri = downloadUri
+                        Log.e("URİ", downloadUri)
+                        database.child("feeds").child(currentUserId).child(businessName)
+                            .setValue(downloadUri)
+
+
+                    }
+                }
 
         database.child("feeds").child(currentUserId).child(nb.businessName).setValue(nb)
             .addOnCompleteListener(this@NewBussinessActivity) { task ->

@@ -20,6 +20,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view" />
 
+        <ImageView
+            android:id="@+id/profileImage"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_weight="0.3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/aa"
+            android:layout_marginTop="130dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
         <View
             android:id="@+id/darkWave"
             android:layout_width="match_parent"
@@ -28,6 +39,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view" />
+
 
         <View
             android:id="@+id/view"
@@ -70,27 +82,17 @@
             android:text="Sign Up"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox"/>
+            app:layout_constraintTop_toBottomOf="@id/radiogroup" />
 
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:text="I accept all terms and conditions  "
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.452"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordTextLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@id/nameTextLayout"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2">
+            app:layout_constraintTop_toBottomOf="@+id/profileImage">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameText"
@@ -150,9 +152,9 @@
                 android:id="@+id/dateText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:datePickerMode="calendar"
                 android:hint="Date of birth"
                 android:inputType="date"
-                android:datePickerMode = "calendar"
                 tools:ignore="SpeakableTextPresentCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -196,18 +198,43 @@
             android:id="@+id/link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/signUpButton"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="40dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:text="Already have an account?"
             android:textColor="@color/blue"
->
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signUpButton"></TextView>
+
+        <RadioGroup
+            android:id="@+id/radiogroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
 
 
-        </TextView>
+            app:layout_constraintEnd_toEndOf="@+id/passwordTextLayout"
+            app:layout_constraintTop_toBottomOf="@id/passwordTextLayout">
+
+            <RadioButton
+                android:id="@+id/ideaSearcher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginBottom="5dp"
+                android:layoutDirection="rtl"
+                android:text="Job Idea Searcher"
+                android:textAlignment="textEnd" />
+
+            <RadioButton
+                android:id="@+id/ideaOwner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layoutDirection="rtl"
+                android:text="Job Owner"
+                android:textAlignment="textEnd" />
+        </RadioGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

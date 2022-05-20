@@ -1,14 +1,14 @@
 package com.example.startupper
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.startupper.adapter.feedAdaptor
+import com.example.startupper.adapter.feedAdapter
+import com.example.startupper.adapter.feedUserAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -20,19 +20,35 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 
+
 class FeedActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var auth: FirebaseAuth
     private lateinit var currentUserId: String
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var storage: FirebaseStorage
-    private lateinit var adapter: feedAdaptor
+    private lateinit var adapterFeed: feedAdapter
+    private lateinit var adapterUser: feedUserAdapter
     private lateinit var recyclerview: RecyclerView
+
     private lateinit var feedList: ArrayList<NewBusinessClass>
-    private lateinit var snap: DataSnapshot
+    private var usertype: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feed)
+
+        recyclerview = findViewById(R.id.feedRecylerView)
+        val linearLayoutManager = LinearLayoutManager(
+            this@FeedActivity,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+        recyclerview.layoutManager = linearLayoutManager
+        adapterUser = feedUserAdapter(mutableListOf())
+
+        recyclerview.adapter = adapterUser
+
+
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigationView.setSelectedItemId(R.id.feedBottomMenu)
 
@@ -60,10 +76,7 @@ class FeedActivity : AppCompatActivity() {
         database = Firebase.database.reference
         feedList = ArrayList()
 
-        recyclerview = findViewById(R.id.feedRecylerView)
-        adapter = feedAdaptor(mutableListOf())
-        recyclerview.adapter = adapter
-        recyclerview.layoutManager = LinearLayoutManager(this@FeedActivity)
+
 
 
         auth = Firebase.auth
@@ -71,34 +84,113 @@ class FeedActivity : AppCompatActivity() {
         var currentUser = auth.currentUser
         if (currentUser != null) {
             currentUserId = currentUser.uid
+
         }
         //veri okuma
         var getdata = object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                for (i in snapshot.children) {
-                    for (y in i.children) {
-                        for (z in y.children) {
-                            var businessname =
-                                z.child("businessName").getValue().toString()
 
-                            Log.e("AAAAA1", businessname)
-                            var location =
-                                z.child("location").getValue().toString()
-                            Log.e("AAAAA2", location)
-                            var description =
-                                z.child("description").getValue().toString()
-                            Log.e("AAAAA3", description)
-                            adapter.addBusiness(
-                                NewBusinessClass(
-                                    businessname,
-                                    location,
-                                    description
-                                )
-                            )
+
+                loop@ for (i in snapshot.children) {
+                    Log.e("control", i.key.toString())
+                    if (i.key.toString() == "Users") {
+                        for (z in i.children) {
+
+                            if (currentUserId == z.key.toString()) {
+                                Log.e("deneme", z.child(currentUserId).getValue().toString())
+                                usertype = z.child("userType")
+                                    .getValue().toString()
+                                Log.e("aaaaa", usertype)
+
+                                if (usertype == "ideaSearcher") {
+                                    recyclerview = findViewById(R.id.feedRecylerView)
+                                    val linearLayoutManager = LinearLayoutManager(
+                                        this@FeedActivity,
+                                        LinearLayoutManager.VERTICAL,
+                                        false
+                                    )
+                                    recyclerview.layoutManager = linearLayoutManager
+
+                                    adapterFeed = feedAdapter(mutableListOf())
+                                    recyclerview.adapter = adapterFeed
+                                    Log.e("aaaaa", usertype)
+
+                                    break
+                                    break@loop
+
+
+                                } else {
+                                    Log.e("aaaaa", usertype)
+                                    break@loop
+                                }
+
+                            }
+                        }
+
+
+                    }
+
+                }
+
+                if (usertype == "ideaSearcher") {
+                    for (i in snapshot.children) {
+                        Log.e("control", "xyxyxyxyx")
+                        if (i.key.toString() == "feeds") {
+                            Log.e("first children", i.toString())
+                            for (y in i.children) {
+                                for (z in y.children) {
+                                    var businessname =
+                                        z.child("businessName").getValue().toString()
+                                    Log.e("AAAAA1", businessname)
+                                    var location =
+                                        z.child("location").getValue().toString()
+                                    Log.e("AAAAA2", location)
+                                    var description =
+                                        z.child("description").getValue().toString()
+                                    var image =
+                                        z.child("imageUri").getValue().toString()
+                                    Log.e("AAAAA3", description)
+                                    adapterFeed.addBusiness(
+                                        NewBusinessClass(
+                                            businessname,
+                                            location,
+                                            description,
+                                            image
+                                        )
+                                    )
+                                }
+                            }
                         }
                     }
                 }
+                if (usertype == "ideaOwner") {
+                    for (i in snapshot.children) {
+                        if (i.key.toString() == "Users") {
+                            for (y in i.children) {
+                                var name = y.child("name").getValue().toString()
+                                var surname = y.child("surname").getValue().toString()
+                                var location = y.child("location").getValue().toString()
+                                var dob = y.child("date").getValue().toString()
+                                var email = y.child("email").getValue().toString()
+                                adapterUser.addUser(
+                                    UserRegisterClass(
+                                        name,
+                                        surname,
+                                        email,
+                                        dob,
+                                        location,
+                                        "0000",
+                                        "000",
+                                        ""
+
+                                    )
+                                )
+                            }
+                        }
+                    }
+                }
+
             }
 
             override fun onCancelled(error: DatabaseError) {
