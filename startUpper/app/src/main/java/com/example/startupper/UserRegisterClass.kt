@@ -9,6 +9,5 @@ data class UserRegisterClass(
     var password: String,
     var userType: String,
     var profileImage: String
-) {
 
-}
+)

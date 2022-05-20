@@ -62,9 +62,14 @@ class Signup : AppCompatActivity() {
             var date = binding.dateText.text.toString().trim()
             var location = binding.locationText.text.toString().trim()
             var password = binding.passwordText.text.toString().trim()
+
             var radiogroup = binding.radiogroup
             var image = binding.profileImage
-            if (name == "") {
+
+            var userType = binding.userType.text.toString().trim()
+
+
+            if(name==""){
                 binding.nameText.setError("Name is required")
                 binding.nameText.requestFocus()
                 return@setOnClickListener

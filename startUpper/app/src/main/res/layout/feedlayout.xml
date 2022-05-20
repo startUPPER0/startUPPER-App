@@ -4,21 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="15dp"
-        android:background="@drawable/custom_rectangle"
+        android:layout_height="match_parent"
+        app:cardElevation="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardCornerRadius="12dp"
 
+        >
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <ImageView
                 android:elevation="10dp"
@@ -32,10 +39,11 @@
                 android:layout_weight="0.6"
                 />
 
+
             <TextView
                 android:gravity="center"
-                android:hint="name"
-                android:textSize="30sp"
+                android:text="name"
+                android:textSize="20sp"
                 android:id="@+id/projectNameTextview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -43,15 +51,17 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="4dp"
-                android:layout_weight="0.15"
+                android:layout_weight="0.05"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:background="@drawable/custom_rectangle" />
+                android:textStyle="bold">
+
+
+            </TextView>
 
             <TextView
                 android:gravity="center"
-                android:hint="location"
-                android:textSize="30sp"
+                android:text="interest"
+                android:textSize="20sp"
                 android:id="@+id/businessLocationTextview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,17 +69,16 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="4dp"
-                android:layout_weight="0.15"
+                android:layout_weight="0.05"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:background="@drawable/custom_rectangle" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:gravity="center"
-                android:hint="desc"
+                android:text="desc"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="30sp"
+                android:textSize="15sp"
                 android:id="@+id/businessdescTextview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -77,10 +86,13 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
-                android:layout_weight="0.1"
-                android:background="@drawable/custom_rectangle" />
+                android:layout_weight="0.2"
+                />
+
         </LinearLayout>
 
-    </FrameLayout>
+
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
