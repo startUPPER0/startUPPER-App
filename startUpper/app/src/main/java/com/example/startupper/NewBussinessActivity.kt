@@ -38,13 +38,14 @@ class NewBussinessActivity : AppCompatActivity() {
     private lateinit var currentUserId: String
     private lateinit var storage: FirebaseStorage
     var businessPicture: Uri? = null
+    private lateinit var downloadUri:String
     private lateinit var currentUser: FirebaseUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityNewbusinessBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        downloadUri=""
         registerLaunchers()
         auth = Firebase.auth
         storage = Firebase.storage
@@ -80,17 +81,20 @@ class NewBussinessActivity : AppCompatActivity() {
                     val imagereference =
                         reference.child("feedPicture").child(currentUserId).child(nb.businessName)
                     imagereference.downloadUrl.addOnSuccessListener {
-                        val downloadUri = it.toString()
-                        nb.imageuri = downloadUri
-                        Log.e("URİ", downloadUri)
-                        database.child("feeds").child(currentUserId).child(businessName)
-                            .setValue(downloadUri)
+                         downloadUri = it.toString()
+                         nb.imageuri = downloadUri as String
+                        Log.e("URİ", downloadUri!!)
+                        nb.imageuri=downloadUri
+                        database.child("feeds").child(currentUserId).child(nb.businessName).child("imageUri").setValue(downloadUri)
 
 
                     }
                 }
 
-        database.child("feeds").child(currentUserId).child(nb.businessName).setValue(nb)
+        database.child("feeds").child(currentUserId).child(nb.businessName).child("businessName").setValue(nb.businessName)
+        database.child("feeds").child(currentUserId).child(nb.businessName).child("description").setValue(nb.description)
+        database.child("feeds").child(currentUserId).child(nb.businessName).child("location").setValue(nb.location)
+        //database.child("feeds").child(currentUserId).child(nb.businessName).child("imageUri").setValue(downloadUri)
             .addOnCompleteListener(this@NewBussinessActivity) { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(
