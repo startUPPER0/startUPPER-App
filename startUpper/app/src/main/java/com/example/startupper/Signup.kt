@@ -11,9 +11,8 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.util.Patterns
-import android.widget.Button
-import android.widget.DatePicker
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -24,8 +23,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -49,7 +47,8 @@ class Signup : AppCompatActivity() {
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
     var profilePicture: Uri? = null
 
-
+    lateinit var list : MutableList<String>
+    lateinit var  autoCompeteTxt : AutoCompleteTextView
 
 
 
@@ -120,6 +119,7 @@ class Signup : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -127,8 +127,45 @@ class Signup : AppCompatActivity() {
         initDatePicker()
         dateButton = findViewById(R.id.dateButton)
         dateButton.setText(getTodaysDate())
+        list = mutableListOf()
+        autoCompeteTxt = binding.Interest
+        database = FirebaseDatabase.getInstance().reference
 
-        var database = FirebaseDatabase.getInstance().reference
+        Log.e("ERRRRROOOOOOOOOOOOE","sfjlvmdşsvmşöldsv")
+        var getdata = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                loop@ for (i in snapshot.children) {
+                    if (i.key.toString().equals("interests")) {
+                        for(j in i.children){
+                            list.add(j.key.toString())
+                        }
+                    }
+
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        }
+        database.addValueEventListener(getdata)
+
+        /*var interest : AutoCompleteTextView = findViewById(R.id.Interest)
+
+        interest.setAdapter(adapterItems)*/
+
+        var adapterItems = ArrayAdapter<String>(this,R.layout.item_interest,list)
+        binding.Interest.setAdapter(adapterItems)
+
+
+
+        autoCompeteTxt.setOnItemClickListener(AdapterView.OnItemClickListener(){ adapterView: AdapterView<*>, view: View, position: Int, id: Long ->
+            var item : String = adapterView.getItemAtPosition(position).toString()
+
+        })
+
+
 
 
 
@@ -167,7 +204,7 @@ class Signup : AppCompatActivity() {
 
 
 
-            if(name==""){
+            if(name.isEmpty()){
                 binding.nameText.setError("Name is required")
                 binding.nameText.requestFocus()
                 return@setOnClickListener

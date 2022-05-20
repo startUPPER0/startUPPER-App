@@ -146,19 +146,17 @@
             android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailTextLayout">
+            app:layout_constraintTop_toBottomOf="@+id/InterestLayout"
+            tools:ignore="NotSibling">
 
             <Button
                 android:id="@+id/dateButton"
                 style="?android:spinnerStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="openDatePicker"
                 android:text="JAN 01 2020"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                android:onClick="openDatePicker">
-
-            </Button>
+                android:textColor="@color/black" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -211,13 +209,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/signUpButton"></TextView>
 
+
         <RadioGroup
             android:id="@+id/radiogroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
 
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="48dp"
             app:layout_constraintStart_toStartOf="@+id/passwordTextLayout"
             app:layout_constraintTop_toBottomOf="@id/passwordTextLayout">
 
@@ -238,6 +237,41 @@
                 android:text="Job Owner"
                 android:textAlignment="textStart" />
         </RadioGroup>
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/InterestLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailTextLayout">
+
+            <AutoCompleteTextView
+                android:id="@+id/Interest"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:hint="Select interest"
+
+                >
+
+            </AutoCompleteTextView>
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </ScrollView>
