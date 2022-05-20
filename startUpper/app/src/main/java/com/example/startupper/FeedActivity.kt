@@ -32,9 +32,15 @@ class FeedActivity : AppCompatActivity() {
     private lateinit var storage: FirebaseStorage
     private lateinit var adapterFeed: feedIdeaAdapter
     private lateinit var adapterUser: feedUserAdapter
+    private var manager: CardStackLayoutManager? = null
 
-    private lateinit var feedList: ArrayList<NewBusinessClass>
+
     private var usertype: String = ""
+
+    companion object{
+        var feedIdeaList: MutableList<NewBusinessClass> = mutableListOf()
+        var feedUserList: MutableList<UserRegisterClass> = mutableListOf()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feed)
@@ -47,6 +53,11 @@ class FeedActivity : AppCompatActivity() {
             }
 
             override fun onCardSwiped(direction: Direction?) {
+                if(direction == Direction.Top) {
+                   // Log.v("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                    //    feedIdeaList.get(0).businessName)
+                   // feedIdeaList.removeAt(0)
+                }
             }
 
             override fun onCardRewound() {
@@ -79,7 +90,6 @@ class FeedActivity : AppCompatActivity() {
             )
 
 
-
             bottomNavigationView = findViewById(R.id.bottom_navigation)
             bottomNavigationView.setSelectedItemId(R.id.feedBottomMenu)
 
@@ -105,7 +115,7 @@ class FeedActivity : AppCompatActivity() {
             })
 
             database = Firebase.database.reference
-            feedList = ArrayList()
+
 
 
 
@@ -123,21 +133,16 @@ class FeedActivity : AppCompatActivity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                         loop@ for (i in snapshot.children) {
-                        Log.e("control", i.key.toString())
                         if (i.key.toString() == "Users") {
                             for (z in i.children) {
 
                                 if (currentUserId == z.key.toString()) {
-                                    Log.e("deneme", z.child(currentUserId).getValue().toString())
                                     usertype = z.child("userType").getValue().toString()
-                                    Log.e("aaaaa", usertype)
 
                                     if (usertype == "ideaSearcher") {
-                                        Log.e("aaaaa", usertype)
                                         break
 
                                     } else {
-                                        Log.e("aaaaa", usertype)
                                         break@loop
                                     }
                                 }
@@ -148,22 +153,17 @@ class FeedActivity : AppCompatActivity() {
                         cardStackView.adapter = feedIdeaAdapter(mutableListOf())
                         adapterFeed = cardStackView.adapter as feedIdeaAdapter
                         for (i in snapshot.children) {
-                            Log.e("control", "xyxyxyxyx")
                             if (i.key.toString() == "feeds") {
-                                Log.e("first children", i.toString())
                                 for (y in i.children) {
                                     for (z in y.children) {
                                         var businessname =
                                             z.child("businessName").getValue().toString()
-                                        Log.e("AAAAA1", businessname)
                                         var location =
                                             z.child("location").getValue().toString()
-                                        Log.e("AAAAA2", location)
                                         var description =
                                             z.child("description").getValue().toString()
                                         var image =
                                             z.child("imageUri").getValue().toString()
-                                        Log.e("AAAAA3", description)
                                         adapterFeed.addBusiness(
                                             NewBusinessClass(
                                                 businessname,
@@ -183,24 +183,28 @@ class FeedActivity : AppCompatActivity() {
                         for (i in snapshot.children) {
                             if (i.key.toString() == "Users") {
                                 for (y in i.children) {
-                                    var name = y.child("name").getValue().toString()
-                                    var surname = y.child("surname").getValue().toString()
-                                    var location = y.child("location").getValue().toString()
-                                    var dob = y.child("date").getValue().toString()
-                                    var email = y.child("email").getValue().toString()
-                                    adapterUser.addUser(
-                                        UserRegisterClass(
-                                            name,
-                                            surname,
-                                            email,
-                                            dob,
-                                            location,
-                                            "0000",
-                                            "000",
-                                            ""
-
+                                    if(currentUserId != y.key.toString()){
+                                        var name = y.child("name").getValue().toString()
+                                        var surname = y.child("surname").getValue().toString()
+                                        var location = y.child("location").getValue().toString()
+                                        var dob = y.child("date").getValue().toString()
+                                        var email = y.child("email").getValue().toString()
+                                        var image = y.child("imageUri").getValue().toString()
+                                        adapterUser.addUser(
+                                            UserRegisterClass(
+                                                name,
+                                                surname,
+                                                email,
+                                                dob,
+                                                location,
+                                                "0000",
+                                                "000",
+                                                "",
+                                                image,
+                                                ""
+                                            )
                                         )
-                                    )
+                                    }
                                 }
                             }
                         }

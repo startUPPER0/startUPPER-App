@@ -16,5 +16,6 @@ class Chats : AppCompatActivity() {
         recyclerView.adapter = chatsRecyclerAdapter(this, dataList)
 
 
+
     }
 }

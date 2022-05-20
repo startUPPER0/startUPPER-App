@@ -6,18 +6,20 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.startupper.FeedActivity
 import com.example.startupper.NewBusinessClass
 import com.example.startupper.R
 import com.example.startupper.UserRegisterClass
+import com.squareup.picasso.Picasso
 
 class feedUserAdapter(var feedUserlist: MutableList<UserRegisterClass>) :
     RecyclerView.Adapter<feedUserAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.findViewById(R.id.feedUserLayoutName)
-        val surname: TextView = view.findViewById(R.id.feedUserLayoutSurname)
-        val location: TextView = view.findViewById(R.id.feedUserLayoutLocation)
-        val dob: TextView = view.findViewById(R.id.feedUserLayoutDOB)
-        //  val contactDeleteIV: ImageView = view.findViewById(R.id.layoutContactDeleteIV)
+        val name: TextView = view.findViewById(R.id.userName)
+        val surname: TextView = view.findViewById(R.id.userSurname)
+        val interest: TextView = view.findViewById(R.id.userInterest)
+        val bio: TextView = view.findViewById(R.id.userBio)
+        val imageView : ImageView = view.findViewById(R.id.imageViewUser)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,8 +37,13 @@ class feedUserAdapter(var feedUserlist: MutableList<UserRegisterClass>) :
         var user = feedUserlist[position]
         holder.name.text = user.name
         holder.surname.text = user.surname
-        holder.location.text = user.location
-        holder.dob.text = user.date
+        holder.interest.text = user.interest
+        holder.bio.text = user.bio
+        //holder.interest.text = user.interest
+        //holder.bio.text = user.bio
+        Picasso.get().load(user.profileImage).into(holder.imageView)
+        FeedActivity.feedUserList.add(user)
+
     }
 
     override fun getItemCount(): Int {

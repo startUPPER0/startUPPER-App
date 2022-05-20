@@ -52,6 +52,7 @@ class Signup : AppCompatActivity() {
 
 
 
+
     private fun getTodaysDate():String{
         val cal :Calendar = Calendar.getInstance()
         val year = cal.get(Calendar.YEAR)
@@ -160,11 +161,10 @@ class Signup : AppCompatActivity() {
 
 
 
-        autoCompeteTxt.setOnItemClickListener(AdapterView.OnItemClickListener(){ adapterView: AdapterView<*>, view: View, position: Int, id: Long ->
-            var item : String = adapterView.getItemAtPosition(position).toString()
 
-        })
 
+
+        var database = FirebaseDatabase.getInstance().reference
 
 
 
@@ -195,10 +195,9 @@ class Signup : AppCompatActivity() {
             var surname = binding.surnameText.text.toString().trim()
             var email = binding.emailText.text.toString().trim()
             var date = binding.dateButton.text.toString().trim()
-
             var location = binding.locationText.text.toString().trim()
             var password = binding.passwordText.text.toString().trim()
-
+            var interest = binding.Interest.text.toString().trim()
             var radiogroup = binding.radiogroup
             var image = binding.profileImage
 
@@ -224,12 +223,11 @@ class Signup : AppCompatActivity() {
                 binding.emailText.requestFocus()
                 return@setOnClickListener
             }
-
-            /*if(date.isEmpty()){
-                binding.dateText.setError("Date of birth is required")
-                binding.dateText.requestFocus()
+            if(interest.isEmpty()) {
+                binding.Interest.setError("Choose an interest")
+                binding.Interest.requestFocus()
                 return@setOnClickListener
-            }*/
+            }
             if(location.isEmpty()){
                 binding.locationText.setError("Location is required")
                 binding.locationText.requestFocus()
@@ -240,6 +238,10 @@ class Signup : AppCompatActivity() {
                 binding.passwordText.requestFocus()
                 return@setOnClickListener
             }
+            if(radiogroup.checkedRadioButtonId == null){
+                binding.radiogroup.requestFocus()
+                return@setOnClickListener
+            }
             if (radiogroup.checkedRadioButtonId == R.id.ideaOwner) {
                 userType = "ideaOwner"
                 Log.e("userType", userType)
@@ -248,8 +250,6 @@ class Signup : AppCompatActivity() {
             if (radiogroup.checkedRadioButtonId == R.id.ideaSearcher) {
                 userType = "ideaSearcher"
                 Log.e("userType", userType)
-
-
             }
 
             auth.createUserWithEmailAndPassword(email, password)
@@ -269,11 +269,20 @@ class Signup : AppCompatActivity() {
                                     location,
                                     password,
                                     userType,
+                                    interest,
+                                    "",
                                     ""
                                 )
                             )
                         }
-                        auth.currentUser?.uid
+
+                        auth.currentUser?.let { it1 -> database.child("Users").
+                        child(it1.uid).child("disliked") }
+
+
+                        auth.currentUser?.let { it1 -> database.child("Users").child(it1.uid).child("liked") }
+
+
 
                         val imageReference =
                             auth.currentUser?.uid?.let { it1 ->

@@ -8,6 +8,8 @@ data class UserRegisterClass(
     var location: String,
     var password: String,
     var userType: String,
-    var profileImage: String
+    var interest: String,
+    var profileImage: String,
+    var bio : String
 
 )

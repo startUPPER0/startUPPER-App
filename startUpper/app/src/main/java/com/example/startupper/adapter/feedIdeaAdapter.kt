@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.startupper.FeedActivity
 import com.example.startupper.NewBusinessClass
 import com.example.startupper.R
 import com.squareup.picasso.Picasso
@@ -37,6 +38,7 @@ class feedIdeaAdapter(var feedlist: MutableList<NewBusinessClass>) :
         holder.location.text = feed.location
         holder.desc.text = feed.description
         Picasso.get().load(feed.imageuri).into(holder.imageBusiness)
+        FeedActivity.feedIdeaList.add(feed)
 
     }
 
