@@ -48,8 +48,7 @@ class Signup : AppCompatActivity() {
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
     var profilePicture: Uri? = null
-    private lateinit var currentUser: FirebaseUser
-    private lateinit var currentUserId: String
+
 
 
 
@@ -119,6 +118,7 @@ class Signup : AppCompatActivity() {
 
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
@@ -131,10 +131,13 @@ class Signup : AppCompatActivity() {
         var database = FirebaseDatabase.getInstance().reference
 
 
+
+        database = FirebaseDatabase.getInstance().reference
+
         auth = Firebase.auth
         registerLaunchers()
         storage = Firebase.storage
-        val reference = storage.reference
+        val storageReference = storage.reference
         database = Firebase.database.reference
 
 
@@ -237,10 +240,10 @@ class Signup : AppCompatActivity() {
 
                         val imageReference =
                             auth.currentUser?.uid?.let { it1 ->
-                                reference.child("userPicture").child(it1).putFile(profilePicture!!)
+                                storageReference.child("userPicture").child(it1).putFile(profilePicture!!)
                                     .addOnSuccessListener {
                                         val imagereference =
-                                            reference.child("userPicture").child(auth.currentUser?.uid!!)
+                                            storageReference.child("userPicture").child(auth.currentUser?.uid!!)
                                         imagereference.downloadUrl.addOnSuccessListener {
                                             val downloadUri = it.toString()
                                             Log.e("URİ", downloadUri)

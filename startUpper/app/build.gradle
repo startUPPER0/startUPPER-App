@@ -45,6 +45,7 @@ android {
 }
 
 dependencies {
+
     implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
@@ -62,6 +63,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'com.google.firebase:firebase-database-ktx'
 
+    //for tinder like feed page
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'com.github.yuyakaido:cardstackview:2.3.4'
     //Dependency for circular ImageView
     implementation  'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.squareup.picasso:picasso:2.8'

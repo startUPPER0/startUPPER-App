@@ -20,10 +20,13 @@
         <entry key="app/src/main/res/drawable/ic_wave.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_wave_dark.xml" value="0.354" />
         <entry key="app/src/main/res/layout/activity_chats.xml" value="0.35260416666666666" />
+        <entry key="app/src/main/res/layout/activity_feed.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23148148148148148" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.35260416666666666" />
+        <entry key="app/src/main/res/layout/feedlayout.xml" value="0.35260416666666666" />
+        <entry key="app/src/main/res/layout/feeduserlayout.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/item_chat.xml" value="0.5" />
       </map>
     </option>

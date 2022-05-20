@@ -5,14 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startupper.NewBusinessClass
 import com.example.startupper.R
 import com.squareup.picasso.Picasso
 
-class feedAdapter(var feedlist: MutableList<NewBusinessClass>) :
-    RecyclerView.Adapter<feedAdapter.ViewHolder>() {
+class feedIdeaAdapter(var feedlist: MutableList<NewBusinessClass>) :
+    RecyclerView.Adapter<feedIdeaAdapter.ViewHolder>() {
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val businessname: TextView = view.findViewById(R.id.projectNameTextview)
         val location: TextView = view.findViewById(R.id.businessLocationTextview)
