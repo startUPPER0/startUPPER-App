@@ -1,6 +1,7 @@
 package com.example.startupper
 
 import android.Manifest
+import android.app.DatePickerDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -9,6 +10,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.util.Patterns
+import android.widget.DatePicker
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -26,6 +28,8 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
+import java.util.*
+
 
 class Signup : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
@@ -42,7 +46,14 @@ class Signup : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         var database = FirebaseDatabase.getInstance().reference
+
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
         auth = Firebase.auth
         registerLaunchers()
         storage = Firebase.storage
@@ -59,14 +70,17 @@ class Signup : AppCompatActivity() {
             var name = binding.nameText.text.toString().trim()
             var surname = binding.surnameText.text.toString().trim()
             var email = binding.emailText.text.toString().trim()
-            var date = binding.dateText.text.toString().trim()
+            var date = binding.dateText
+            val datee = DatePickerDialog(this,DatePickerDialog.OnDateSetListener { picker, mYear:Int, mMonth:Int, mDay:Int ->
+                date.setText(""+mDay+"/"+mMonth+"/"+mYear)
+            },year,month,day)
+
             var location = binding.locationText.text.toString().trim()
             var password = binding.passwordText.text.toString().trim()
 
             var radiogroup = binding.radiogroup
             var image = binding.profileImage
 
-            var userType = binding.userType.text.toString().trim()
 
 
             if(name==""){
@@ -89,12 +103,13 @@ class Signup : AppCompatActivity() {
                 binding.emailText.requestFocus()
                 return@setOnClickListener
             }
-            if (date.isEmpty()) {
+
+            /*if(date.isEmpty()){
                 binding.dateText.setError("Date of birth is required")
                 binding.dateText.requestFocus()
                 return@setOnClickListener
-            }
-            if (location.isEmpty()) {
+            }*/
+            if(location.isEmpty()){
                 binding.locationText.setError("Location is required")
                 binding.locationText.requestFocus()
                 return@setOnClickListener
@@ -122,13 +137,14 @@ class Signup : AppCompatActivity() {
                         Log.d(TAG, "createUserWithEmail:success")
                         val user = auth.currentUser
                         Toast.makeText(baseContext, "Welcome!", Toast.LENGTH_SHORT).show()
+
                         auth.currentUser?.let { it1 ->
                             database.child("Users").child(it1.uid).setValue(
                                 UserRegisterClass(
                                     name,
                                     surname,
                                     email,
-                                    date,
+                                    datee.toString().trim(),
                                     location,
                                     password,
                                     userType,
@@ -155,6 +171,7 @@ class Signup : AppCompatActivity() {
                                         }
                                     }
                             }
+
 
                         startActivity(Intent(this@Signup, Login::class.java))
                     } else {
