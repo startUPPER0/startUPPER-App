@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Profile">
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -148,24 +154,19 @@ Burdurluyum Antalyada okuyorum. CSS, Javascript, Java, C gibi dillere hakimim.
 B1+ ingilizce biliyorum."
             android:layout_marginTop="10dp"/>
         </com.google.android.material.card.MaterialCardView>
-        <LinearLayout
-            android:layout_width="match_parent"
+
+        <Button
+            android:id="@+id/startNewBussinessBT"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="40dp"
-            >
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_marginStart="50dp"
+            android:padding="10dp"
+            android:text="START NEW BUSINESS"
+            android:textColor="@color/white"
+            android:layout_marginTop="40dp"></Button>
 
-            <Button
-                android:id="@+id/startNewBussinessBT"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_marginStart="50dp"
-                android:padding="10dp"
-                android:text="START NEW BUSINESS"
-                android:textColor="@color/white"></Button>
-
-        </LinearLayout>
 
         <Button
             android:id="@+id/showmyBusiness"
@@ -174,7 +175,7 @@ B1+ ingilizce biliyorum."
             android:text="show my business" />
 
     </LinearLayout>
-
+</ScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -182,7 +183,7 @@ B1+ ingilizce biliyorum."
 
         android:background="#fff"
         app:labelVisibilityMode="selected"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation_menu" />
 

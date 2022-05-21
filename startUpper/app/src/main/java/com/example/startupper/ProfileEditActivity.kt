@@ -95,6 +95,7 @@ class ProfileEditActivity : AppCompatActivity() {
             var location = binding.locationText.text.toString().trim()
             var interest = binding.Interest.text.toString()
             var bio = binding.bioText.text.toString()
+            var radiogroup = binding.radiogroup
 
             auth.currentUser?.let { it1 ->
                 database.child("Users").child(it1.uid).child("name").setValue(name)
@@ -110,6 +111,9 @@ class ProfileEditActivity : AppCompatActivity() {
             }
             auth.currentUser?.let { it1 ->
                 database.child("Users").child(it1.uid).child("bio").setValue(bio)
+            }
+            auth.currentUser?.let { it1 ->
+                database.child("Users").child(it1.uid).child("userType").setValue(radiogroup)
             }
             startActivity(Intent(this@ProfileEditActivity, Profile::class.java))
 

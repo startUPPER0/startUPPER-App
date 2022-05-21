@@ -108,9 +108,7 @@ class Profile : AppCompatActivity() {
             startActivity(Intent(this@Profile, NewBussinessActivity::class.java))
             finish()
         }
-        binding.manageInterestBT.setOnClickListener {
-            manageInterests()
-        }
+
     }
 
 
