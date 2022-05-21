@@ -125,7 +125,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/bioText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:hint="Biography"
                 android:inputType="text"
                 tools:ignore="SpeakableTextPresentCheck" />
@@ -143,11 +143,10 @@
             app:layout_constraintTop_toBottomOf="@+id/surnameTextLayout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/emailText"
+                android:id="@+id/locationText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
+                android:hint="Location"
                 tools:ignore="SpeakableTextPresentCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -219,9 +218,7 @@
                 android:id="@+id/Interest"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:inputType="none"
                 android:hint="Select interest"
-
                 >
 
             </AutoCompleteTextView>
