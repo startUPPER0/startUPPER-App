@@ -132,7 +132,7 @@ class Signup : AppCompatActivity() {
         autoCompeteTxt = binding.Interest
         database = FirebaseDatabase.getInstance().reference
 
-        Log.e("ERRRRROOOOOOOOOOOOE","sfjlvmdşsvmşöldsv")
+
         var getdata = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 loop@ for (i in snapshot.children) {

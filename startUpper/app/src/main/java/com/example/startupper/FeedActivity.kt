@@ -34,7 +34,7 @@ class FeedActivity : AppCompatActivity() {
     private lateinit var adapterUser: feedUserAdapter
     private var manager: CardStackLayoutManager? = null
 
-
+    private lateinit var feedList: ArrayList<NewBusinessClass>
     private var usertype: String = ""
 
     companion object{
