@@ -209,7 +209,8 @@ class FeedActivity : AppCompatActivity() {
                                 if (i.key.toString() == "feeds") {
                                     for (y in i.children) {
                                         for (z in y.children) {
-                                            if(!seenIdeas.contains(z.child("businessName").toString())) {
+                                            if(currentUserId != y.key.toString()) {
+                                                //if(!seenIdeas.contains(z.child("businessName").toString())) {
                                                 var businessname =
                                                     z.child("businessName").value.toString()
                                                 var location =
@@ -226,7 +227,9 @@ class FeedActivity : AppCompatActivity() {
                                                         image
                                                     )
                                                 )
+                                                //}
                                             }
+
 
                                         }
                                     }
@@ -249,13 +252,9 @@ class FeedActivity : AppCompatActivity() {
 
                             cardStackView.adapter = feedUserAdapter(mutableListOf(),UserList)
                             adapterUser = cardStackView.adapter as feedUserAdapter
-                            Log.e("USER ID", "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ")
                             for (i in snapshot.children) {
                                 if (i.key.toString() == "Users") {
                                     for (y in i.children) {
-                                        Log.e("Listtt", seenUsers.toString())
-                                        Log.e("USER ID", y.key.toString())
-                                        Log.e("PROBLEEEEEEEEEEEEEEEEEM", seenUsers.contains(y.key.toString()).toString())
                                         if(currentUserId != y.key.toString()){
 
                                                 var name = y.child("name").value.toString()
