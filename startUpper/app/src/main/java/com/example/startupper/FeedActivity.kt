@@ -94,7 +94,7 @@ class FeedActivity : AppCompatActivity() {
                     Log.e("NAME", likedName)
                     database.child("Users").get().addOnSuccessListener {
                         //users
-
+                        Log.e("children neymiş YAAAAUUUUUUUUV", it.children.toList().toString())
                         loop@ for(i in it.children){
                             if(i.child("name").value?.toString().equals(likedName)) {
                                 likedID = i.key.toString()
@@ -130,7 +130,7 @@ class FeedActivity : AppCompatActivity() {
         })
         manager.setStackFrom(StackFrom.Right)
         manager.setDirections(Direction.VERTICAL)
-        manager.setVisibleCount(2)
+        manager.setVisibleCount(3)
         manager.setTranslationInterval(8.0f)
         manager.setScaleInterval(0.95f)
         manager.setCanScrollHorizontal(false)
