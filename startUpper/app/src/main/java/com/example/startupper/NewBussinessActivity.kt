@@ -83,7 +83,7 @@ class NewBussinessActivity : AppCompatActivity() {
                     imagereference.downloadUrl.addOnSuccessListener {
                          downloadUri = it.toString()
                          nb.imageuri = downloadUri as String
-                        Log.e("URİ", downloadUri!!)
+                        Log.e("URİ", downloadUri)
                         nb.imageuri=downloadUri
                         database.child("feeds").child(currentUserId).child(nb.businessName).child("imageUri").setValue(downloadUri)
 

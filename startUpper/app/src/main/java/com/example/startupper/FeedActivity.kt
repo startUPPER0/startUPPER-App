@@ -1,11 +1,9 @@
 package com.example.startupper
 
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.startupper.adapter.feedIdeaAdapter
@@ -38,14 +36,23 @@ class FeedActivity : AppCompatActivity() {
     private var usertype: String = ""
 
     companion object{
-        var feedIdeaList: MutableList<NewBusinessClass> = mutableListOf()
-        var feedUserList: MutableList<UserRegisterClass> = mutableListOf()
+        var IdeaList: MutableList<NewBusinessClass> = mutableListOf()
+        var UserList: MutableList<UserRegisterClass> = mutableListOf()
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feed)
 
+        database = Firebase.database.reference
+        auth = Firebase.auth
+        storage = Firebase.storage
 
+        auth.currentUser?.let {
+            database.child("Users").child(it.uid).child("userType").get()
+                .addOnSuccessListener {
+                    usertype = it.value.toString()
+                }
+        }
 
         val cardStackView = findViewById<CardStackView>(R.id.feedStackView)
         val manager = CardStackLayoutManager(this, object : CardStackListener{
@@ -53,11 +60,59 @@ class FeedActivity : AppCompatActivity() {
             }
 
             override fun onCardSwiped(direction: Direction?) {
-                if(direction == Direction.Top) {
-                   // Log.v("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-                    //    feedIdeaList.get(0).businessName)
-                   // feedIdeaList.removeAt(0)
+                if(usertype == "ideaSearcher"){
+                    var likedID = ""
+                    var likedBusiness = IdeaList[0].businessName
+
+                    database.child("feeds").get().addOnSuccessListener {
+                        //users
+                        loop@ for(i in it.children){
+                            //each user's ideas'
+                            for(k in i.children) {
+                                if(k.child("businessName").value?.equals(likedBusiness) == true) {
+                                    likedID = i.key.toString()
+                                    break@loop
+                                }
+                            }
+                        }
+                        if(direction == Direction.Top) {
+                            database.child("Users").child(currentUserId).
+                            child("liked").child(likedID).child(likedBusiness).setValue("")
+                        }
+                        if(direction == Direction.Bottom) {
+                            database.child("Users").child(currentUserId).
+                            child("disliked").child(likedID).child(likedBusiness).setValue("")
+                        }
+                    }
+                    IdeaList.removeAt(0)
                 }
+
+                else if(usertype == "ideaOwner"){
+                    Log.e("LİSTEE", UserList.toString())
+                    var likedID = ""
+                    var likedName = UserList[0].name
+                    Log.e("NAME", likedName)
+                    database.child("users").get().addOnSuccessListener {
+                        //users
+                        loop@ for(i in it.children){
+                            if(i.child("name").value?.equals(likedName) == true) {
+                                likedID = i.key.toString()
+                                Log.e("current ID", likedID)
+                                break@loop
+                            }
+                        }
+                        if(direction == Direction.Top) {
+                            database.child("Users").child(currentUserId).
+                            child("liked").child(likedID).child(likedName).setValue("")
+                        }
+                        if(direction == Direction.Bottom) {
+                            database.child("Users").child(currentUserId).
+                            child("disliked").child(likedID).child(likedName).setValue("")
+                        }
+                    }
+                    UserList.removeAt(0)
+                }
+
             }
 
             override fun onCardRewound() {
@@ -114,14 +169,7 @@ class FeedActivity : AppCompatActivity() {
                 false
             })
 
-            database = Firebase.database.reference
 
-
-
-
-
-            auth = Firebase.auth
-            storage = Firebase.storage
             var currentUser = auth.currentUser
             if (currentUser != null) {
                 currentUserId = currentUser.uid
@@ -137,7 +185,7 @@ class FeedActivity : AppCompatActivity() {
                             for (z in i.children) {
 
                                 if (currentUserId == z.key.toString()) {
-                                    usertype = z.child("userType").getValue().toString()
+                                    usertype = z.child("userType").value.toString()
 
                                     if (usertype == "ideaSearcher") {
                                         break
@@ -157,13 +205,13 @@ class FeedActivity : AppCompatActivity() {
                                 for (y in i.children) {
                                     for (z in y.children) {
                                         var businessname =
-                                            z.child("businessName").getValue().toString()
+                                            z.child("businessName").value.toString()
                                         var location =
-                                            z.child("location").getValue().toString()
+                                            z.child("location").value.toString()
                                         var description =
-                                            z.child("description").getValue().toString()
+                                            z.child("description").value.toString()
                                         var image =
-                                            z.child("imageUri").getValue().toString()
+                                            z.child("imageUri").value.toString()
                                         adapterFeed.addBusiness(
                                             NewBusinessClass(
                                                 businessname,
@@ -184,12 +232,12 @@ class FeedActivity : AppCompatActivity() {
                             if (i.key.toString() == "Users") {
                                 for (y in i.children) {
                                     if(currentUserId != y.key.toString()){
-                                        var name = y.child("name").getValue().toString()
-                                        var surname = y.child("surname").getValue().toString()
-                                        var location = y.child("location").getValue().toString()
-                                        var dob = y.child("date").getValue().toString()
-                                        var email = y.child("email").getValue().toString()
-                                        var image = y.child("imageUri").getValue().toString()
+                                        var name = y.child("name").value.toString()
+                                        var surname = y.child("surname").value.toString()
+                                        var location = y.child("location").value.toString()
+                                        var dob = y.child("date").value.toString()
+                                        var email = y.child("email").value.toString()
+                                        var image = y.child("imageUri").value.toString()
                                         adapterUser.addUser(
                                             UserRegisterClass(
                                                 name,

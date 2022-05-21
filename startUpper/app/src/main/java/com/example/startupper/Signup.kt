@@ -276,31 +276,23 @@ class Signup : AppCompatActivity() {
                             )
                         }
 
-                        auth.currentUser?.let { it1 -> database.child("Users").
-                        child(it1.uid).child("disliked") }
+                        auth.currentUser?.uid?.let { it1 ->
+                            storageReference.child("userPicture").child(it1).putFile(profilePicture!!)
+                                .addOnSuccessListener {
+                                    val imagereference =
+                                        storageReference.child("userPicture").child(auth.currentUser?.uid!!)
+                                    imagereference.downloadUrl.addOnSuccessListener {
+                                        Log.e("URİİİİİİİİİİ", it.toString())
+                                        val downloadUri = it.toString()
+                                        Log.e("URİ", downloadUri)
+                                        database.child("Users").child(auth.currentUser?.uid!!)
+                                            .child("imageUri")
+                                            .setValue(downloadUri)
 
 
-                        auth.currentUser?.let { it1 -> database.child("Users").child(it1.uid).child("liked") }
-
-
-
-                        val imageReference =
-                            auth.currentUser?.uid?.let { it1 ->
-                                storageReference.child("userPicture").child(it1).putFile(profilePicture!!)
-                                    .addOnSuccessListener {
-                                        val imagereference =
-                                            storageReference.child("userPicture").child(auth.currentUser?.uid!!)
-                                        imagereference.downloadUrl.addOnSuccessListener {
-                                            val downloadUri = it.toString()
-                                            Log.e("URİ", downloadUri)
-                                            database.child("Users").child(auth.currentUser?.uid!!)
-                                                .child("imageUri")
-                                                .setValue(downloadUri)
-
-
-                                        }
                                     }
-                            }
+                                }
+                        }
 
 
                         startActivity(Intent(this@Signup, Login::class.java))

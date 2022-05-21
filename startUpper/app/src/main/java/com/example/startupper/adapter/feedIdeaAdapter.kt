@@ -38,7 +38,7 @@ class feedIdeaAdapter(var feedlist: MutableList<NewBusinessClass>) :
         holder.location.text = feed.location
         holder.desc.text = feed.description
         Picasso.get().load(feed.imageuri).into(holder.imageBusiness)
-        FeedActivity.feedIdeaList.add(feed)
+        FeedActivity.IdeaList.add(feed)
 
     }
 

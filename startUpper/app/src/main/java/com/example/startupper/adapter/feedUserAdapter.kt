@@ -7,7 +7,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startupper.FeedActivity
-import com.example.startupper.NewBusinessClass
 import com.example.startupper.R
 import com.example.startupper.UserRegisterClass
 import com.squareup.picasso.Picasso
@@ -28,7 +27,8 @@ class feedUserAdapter(var feedUserlist: MutableList<UserRegisterClass>) :
     }
 
     fun addUser(feedUser: UserRegisterClass) {
-        feedUserlist.add(feedUser)
+        if(!feedUserlist.contains(feedUser))
+            feedUserlist.add(feedUser)
         notifyItemInserted(feedUserlist.size - 1)
     }
 
@@ -42,7 +42,7 @@ class feedUserAdapter(var feedUserlist: MutableList<UserRegisterClass>) :
         //holder.interest.text = user.interest
         //holder.bio.text = user.bio
         Picasso.get().load(user.profileImage).into(holder.imageView)
-        FeedActivity.feedUserList.add(user)
+        FeedActivity.UserList.add(user)
 
     }
 
