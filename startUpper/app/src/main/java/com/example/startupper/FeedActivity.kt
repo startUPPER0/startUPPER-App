@@ -249,31 +249,39 @@ class FeedActivity : AppCompatActivity() {
 
                             cardStackView.adapter = feedUserAdapter(mutableListOf(),UserList)
                             adapterUser = cardStackView.adapter as feedUserAdapter
-
+                            Log.e("USER ID", "İİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİİ")
                             for (i in snapshot.children) {
                                 if (i.key.toString() == "Users") {
                                     for (y in i.children) {
-                                        if(currentUserId != y.key.toString() && !seenUsers.contains(y.key.toString())){
-                                            var name = y.child("name").value.toString()
-                                            var surname = y.child("surname").value.toString()
-                                            var location = y.child("location").value.toString()
-                                            var dob = y.child("date").value.toString()
-                                            var email = y.child("email").value.toString()
-                                            var image = y.child("imageUri").value.toString()
-                                            adapterUser.addUser(
-                                                UserRegisterClass(
-                                                    name,
-                                                    surname,
-                                                    email,
-                                                    dob,
-                                                    location,
-                                                    "0000",
-                                                    "000",
-                                                    "",
-                                                    image,
-                                                    ""
+                                        Log.e("Listtt", seenUsers.toString())
+                                        Log.e("USER ID", y.key.toString())
+                                        Log.e("PROBLEEEEEEEEEEEEEEEEEM", seenUsers.contains(y.key.toString()).toString())
+                                        if(currentUserId != y.key.toString()){
+
+                                                var name = y.child("name").value.toString()
+                                                var surname = y.child("surname").value.toString()
+                                                var location = y.child("location").value.toString()
+                                                var dob = y.child("date").value.toString()
+                                                var email = y.child("email").value.toString()
+                                                var image = y.child("imageUri").value.toString()
+                                            //PROBLEM BU KOŞULU SİLİNCE TEKRAR TEKRAR GÖRÜYOSUN
+                                            if(!seenUsers.contains(y.key.toString())){
+                                                adapterUser.addUser(
+                                                    UserRegisterClass(
+                                                        name,
+                                                        surname,
+                                                        email,
+                                                        dob,
+                                                        location,
+                                                        "0000",
+                                                        "000",
+                                                        "",
+                                                        image,
+                                                        ""
+                                                    )
                                                 )
-                                            )
+                                            }
+
                                         }
                                     }
                                 }
