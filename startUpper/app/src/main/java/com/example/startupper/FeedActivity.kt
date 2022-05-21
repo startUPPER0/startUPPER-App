@@ -263,6 +263,7 @@ class FeedActivity : AppCompatActivity() {
                                                 var dob = y.child("date").value.toString()
                                                 var email = y.child("email").value.toString()
                                                 var image = y.child("imageUri").value.toString()
+                                                var bio = y.child("bio").value.toString()
                                             //PROBLEM BU KOŞULU SİLİNCE TEKRAR TEKRAR GÖRÜYOSUN
                                             //if(!seenUsers.contains(y.key.toString())){
                                                 adapterUser.addUser(
@@ -276,7 +277,7 @@ class FeedActivity : AppCompatActivity() {
                                                         "000",
                                                         "",
                                                         image,
-                                                        ""
+                                                        bio
                                                     )
                                                 )
                                             //}
