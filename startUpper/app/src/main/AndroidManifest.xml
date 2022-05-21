@@ -46,8 +46,12 @@
         <activity
             android:name=".Signup"
             android:exported="false" />
-        <activity android:name=".ProfileEditActivity"
-            android:exported="false"/>
+        <activity
+            android:name=".ProfileEditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MyBusiness"
+            android:exported="false" />
     </application>
 
 </manifest>

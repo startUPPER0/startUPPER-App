@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import androidx.appcompat.widget.Toolbar
 import com.example.startupper.databinding.ActivityProfileBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -30,6 +31,7 @@ class Profile : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var database: DatabaseReference
     private lateinit var storage: FirebaseStorage
+    private lateinit var showbutton: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
@@ -38,13 +40,16 @@ class Profile : AppCompatActivity() {
         setSupportActionBar(appbar)
         database = Firebase.database.reference
         auth = Firebase.auth
-
+        showbutton = findViewById(R.id.showmyBusiness)
 
         storage = Firebase.storage
         var currentUser = auth.currentUser
         if (currentUser != null) {
             currentUserId = currentUser.uid
 
+        }
+        showbutton.setOnClickListener {
+            startActivity(Intent(this@Profile, MyBusiness::class.java))
         }
         var getdata = object : ValueEventListener {
 

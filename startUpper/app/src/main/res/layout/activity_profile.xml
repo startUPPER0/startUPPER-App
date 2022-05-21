@@ -147,6 +147,12 @@ B1+ ingilizce biliyorum." />
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/showmyBusiness"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="show my business" />
+
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
