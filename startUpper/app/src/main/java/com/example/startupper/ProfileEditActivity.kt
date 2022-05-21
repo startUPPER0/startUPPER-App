@@ -48,6 +48,7 @@ class ProfileEditActivity : AppCompatActivity() {
                 binding.surnameText.setText(it.child("surname").value.toString())
                 binding.locationText.setText(it.child("location").value.toString())
                 binding.Interest.setText(it.child("interest").value.toString())
+                binding.bioText.setText(it.child("bio").value.toString())
                 if(it.child("userType").value=="ideaSearcher")
                     binding.radiogroup.check(binding.ideaSearcher.id)
                 if(it.child("userType").value=="ideaOwner")
