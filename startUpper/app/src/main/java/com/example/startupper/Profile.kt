@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.widget.Toolbar
 import com.example.startupper.databinding.ActivityProfileBinding
@@ -32,6 +33,7 @@ class Profile : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private lateinit var storage: FirebaseStorage
     private lateinit var showbutton: Button
+    private lateinit var userType : String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
@@ -48,6 +50,15 @@ class Profile : AppCompatActivity() {
             currentUserId = currentUser.uid
 
         }
+        userType = ""
+        database.child("Users").child(currentUserId).get().addOnSuccessListener {
+            userType = it.child("userType").value.toString()
+            if(userType == "ideaSearcher") {
+                binding.startNewBussinessBT.visibility = View.GONE
+            }
+        }
+
+
         showbutton.setOnClickListener {
             startActivity(Intent(this@Profile, MyBusiness::class.java))
         }
