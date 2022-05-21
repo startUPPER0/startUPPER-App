@@ -35,10 +35,9 @@ class FeedActivity : AppCompatActivity() {
     private lateinit var feedList: ArrayList<NewBusinessClass>
     private var usertype: String = ""
 
-    companion object{
-        var IdeaList: MutableList<NewBusinessClass> = mutableListOf()
-        var UserList: MutableList<UserRegisterClass> = mutableListOf()
-    }
+
+    var IdeaList: MutableList<NewBusinessClass> = mutableListOf()
+    var UserList: MutableList<UserRegisterClass> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feed)
@@ -88,13 +87,10 @@ class FeedActivity : AppCompatActivity() {
                 }
 
                 else if(usertype == "ideaOwner"){
-                    Log.e("LİSTEE", UserList.toString())
                     var likedID = ""
                     var likedName = UserList[0].name
-                    Log.e("NAME", likedName)
                     database.child("Users").get().addOnSuccessListener {
                         //users
-                        Log.e("children neymiş YAAAAUUUUUUUUV", it.children.toList().toString())
                         loop@ for(i in it.children){
                             if(i.child("name").value?.toString().equals(likedName)) {
                                 likedID = i.key.toString()
@@ -183,79 +179,108 @@ class FeedActivity : AppCompatActivity() {
                         loop@ for (i in snapshot.children) {
                         if (i.key.toString() == "Users") {
                             for (z in i.children) {
-
                                 if (currentUserId == z.key.toString()) {
                                     usertype = z.child("userType").value.toString()
-
                                     if (usertype == "ideaSearcher") {
                                         break
-
-                                    } else {
+                                    } else
                                         break@loop
-                                    }
                                 }
                             }
                         }
                     }
                     if (usertype == "ideaSearcher") {
-                        cardStackView.adapter = feedIdeaAdapter(mutableListOf())
-                        adapterFeed = cardStackView.adapter as feedIdeaAdapter
-                        for (i in snapshot.children) {
-                            if (i.key.toString() == "feeds") {
-                                for (y in i.children) {
-                                    for (z in y.children) {
-                                        var businessname =
-                                            z.child("businessName").value.toString()
-                                        var location =
-                                            z.child("location").value.toString()
-                                        var description =
-                                            z.child("description").value.toString()
-                                        var image =
-                                            z.child("imageUri").value.toString()
-                                        adapterFeed.addBusiness(
-                                            NewBusinessClass(
-                                                businessname,
-                                                location,
-                                                description,
-                                                image
-                                            )
-                                        )
-                                    }
+                        var seenIdeas = mutableListOf<String>()
+                        database.child("Users").child(currentUserId).get().addOnSuccessListener {
+                            for(j in it.child("liked").children){
+                                for(k in j.children) {
+                                    seenIdeas.add(k.key.toString())
                                 }
                             }
+                            for(j in it.child("disliked").children){
+                                for(k in j.children) {
+                                    seenIdeas.add(k.key.toString())
+                                }
+                            }
+
+                            cardStackView.adapter = feedIdeaAdapter(mutableListOf(),IdeaList)
+                            adapterFeed = cardStackView.adapter as feedIdeaAdapter
+                            for (i in snapshot.children) {
+                                if (i.key.toString() == "feeds") {
+                                    for (y in i.children) {
+                                        for (z in y.children) {
+                                            if(!seenIdeas.contains(z.child("businessName").toString())) {
+                                                var businessname =
+                                                    z.child("businessName").value.toString()
+                                                var location =
+                                                    z.child("location").value.toString()
+                                                var description =
+                                                    z.child("description").value.toString()
+                                                var image =
+                                                    z.child("imageUri").value.toString()
+                                                adapterFeed.addBusiness(
+                                                    NewBusinessClass(
+                                                        businessname,
+                                                        location,
+                                                        description,
+                                                        image
+                                                    )
+                                                )
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }                                                    
                         }
+
                     }
                     if (usertype == "ideaOwner") {
-                        cardStackView.adapter = feedUserAdapter(mutableListOf())
-                        adapterUser = cardStackView.adapter as feedUserAdapter
-                        for (i in snapshot.children) {
-                            if (i.key.toString() == "Users") {
-                                for (y in i.children) {
-                                    if(currentUserId != y.key.toString()){
-                                        var name = y.child("name").value.toString()
-                                        var surname = y.child("surname").value.toString()
-                                        var location = y.child("location").value.toString()
-                                        var dob = y.child("date").value.toString()
-                                        var email = y.child("email").value.toString()
-                                        var image = y.child("imageUri").value.toString()
-                                        adapterUser.addUser(
-                                            UserRegisterClass(
-                                                name,
-                                                surname,
-                                                email,
-                                                dob,
-                                                location,
-                                                "0000",
-                                                "000",
-                                                "",
-                                                image,
-                                                ""
+                        var seenUsers = mutableListOf<String>()
+
+                        database.child("Users").child(currentUserId).get().addOnSuccessListener {
+                            for(i in it.child("liked").children) {
+                                seenUsers.add(i.key.toString())
+
+                            }
+                            for(i in it.child("disliked").children) {
+                                seenUsers.add(i.key.toString())
+                            }
+
+                            cardStackView.adapter = feedUserAdapter(mutableListOf(),UserList)
+                            adapterUser = cardStackView.adapter as feedUserAdapter
+
+                            for (i in snapshot.children) {
+                                if (i.key.toString() == "Users") {
+                                    for (y in i.children) {
+                                        if(currentUserId != y.key.toString() && !seenUsers.contains(y.key.toString())){
+                                            var name = y.child("name").value.toString()
+                                            var surname = y.child("surname").value.toString()
+                                            var location = y.child("location").value.toString()
+                                            var dob = y.child("date").value.toString()
+                                            var email = y.child("email").value.toString()
+                                            var image = y.child("imageUri").value.toString()
+                                            adapterUser.addUser(
+                                                UserRegisterClass(
+                                                    name,
+                                                    surname,
+                                                    email,
+                                                    dob,
+                                                    location,
+                                                    "0000",
+                                                    "000",
+                                                    "",
+                                                    image,
+                                                    ""
+                                                )
                                             )
-                                        )
+                                        }
                                     }
                                 }
                             }
+
                         }
+
                     }
 
                 }

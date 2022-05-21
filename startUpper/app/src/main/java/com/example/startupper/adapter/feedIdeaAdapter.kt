@@ -11,7 +11,7 @@ import com.example.startupper.NewBusinessClass
 import com.example.startupper.R
 import com.squareup.picasso.Picasso
 
-class feedIdeaAdapter(var feedlist: MutableList<NewBusinessClass>) :
+class feedIdeaAdapter(var feedlist: MutableList<NewBusinessClass>,var mutableList : MutableList<NewBusinessClass>) :
     RecyclerView.Adapter<feedIdeaAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -38,7 +38,7 @@ class feedIdeaAdapter(var feedlist: MutableList<NewBusinessClass>) :
         holder.location.text = feed.location
         holder.desc.text = feed.description
         Picasso.get().load(feed.imageuri).into(holder.imageBusiness)
-        FeedActivity.IdeaList.add(feed)
+        mutableList.add(feed)
 
     }
 

@@ -11,7 +11,7 @@ import com.example.startupper.R
 import com.example.startupper.UserRegisterClass
 import com.squareup.picasso.Picasso
 
-class feedUserAdapter(var feedUserlist: MutableList<UserRegisterClass>) :
+class feedUserAdapter(var feedUserlist: MutableList<UserRegisterClass>, var mutableList: MutableList<UserRegisterClass> ) :
     RecyclerView.Adapter<feedUserAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.userName)
@@ -42,7 +42,7 @@ class feedUserAdapter(var feedUserlist: MutableList<UserRegisterClass>) :
         //holder.interest.text = user.interest
         //holder.bio.text = user.bio
         Picasso.get().load(user.profileImage).into(holder.imageView)
-        FeedActivity.UserList.add(user)
+        mutableList.add(user)
 
     }
 
