@@ -42,7 +42,11 @@ class ProfileEditActivity : AppCompatActivity() {
                 binding.surnameText.setText(it.child("surname").value.toString())
                 binding.emailText.setText(it.child("email").value.toString())
                 binding.Interest.setText(it.child("interest").value.toString())
-                binding.radiogroup.setText(it.child("userType").value.toString())
+                if(it.child("userType").value=="ideaSearcher")
+                    binding.radiogroup.check(binding.ideaSearcher.id)
+                if(it.child("userType").value=="ideaOwner")
+                    binding.radiogroup.check(binding.ideaOwner.id)
+
             }
         }
 
@@ -57,60 +61,6 @@ class ProfileEditActivity : AppCompatActivity() {
             var email = binding.emailText.text.toString().trim()
             var interest = binding.Interest.text.toString()
             var bio = binding.bioText.text.toString()
-
-
-
-
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        Log.d(ContentValues.TAG, "createUserWithEmail:success")
-                        val user = auth.currentUser
-                        Toast.makeText(baseContext, "Welcome!", Toast.LENGTH_SHORT).show()
-
-                        auth.currentUser?.let { it1 ->
-                            database.child("Users").child(it1.uid).setValue(
-                                UserRegisterClass(
-                                    name,
-                                    surname,
-                                    email,
-                                    date,
-                                    location,
-                                    password,
-                                    userType,
-                                    ""
-                                )
-                            )
-                        }
-                        auth.currentUser?.uid
-
-                        val imageReference =
-                            auth.currentUser?.uid?.let { it1 ->
-                                storageReference.child("userPicture").child(it1).putFile(profilePicture!!)
-                                    .addOnSuccessListener {
-                                        val imagereference =
-                                            storageReference.child("userPicture").child(auth.currentUser?.uid!!)
-                                        imagereference.downloadUrl.addOnSuccessListener {
-                                            val downloadUri = it.toString()
-                                            Log.e("URİ", downloadUri)
-                                            database.child("Users").child(auth.currentUser?.uid!!)
-                                                .child("imageUri")
-                                                .setValue(downloadUri)
-
-
-                                        }
-                                    }
-                            }
-
-
-                        startActivity(Intent(this@Signup, Login::class.java))
-                    } else {
-                        Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(baseContext, "Email already used!", Toast.LENGTH_SHORT)
-                            .show()
-
-                    }
-                }
 
         }
 
