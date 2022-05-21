@@ -96,7 +96,42 @@ class ProfileEditActivity : AppCompatActivity() {
             var interest = binding.Interest.text.toString()
             var bio = binding.bioText.text.toString()
             var radiogroup = binding.radiogroup
+            var userType = ""
+            if (radiogroup.checkedRadioButtonId == R.id.ideaOwner) {
+                userType = "ideaOwner"
+                Log.e("userType", userType)
 
+            }
+            if (radiogroup.checkedRadioButtonId == R.id.ideaSearcher) {
+                userType = "ideaSearcher"
+                Log.e("userType", userType)
+            }
+
+            if(name.isEmpty()){
+                binding.nameText.setError("Name is required")
+                binding.nameText.requestFocus()
+                return@setOnClickListener
+            }
+            if (surname.isEmpty()) {
+                binding.surnameText.setError("Surname is required")
+                binding.surnameText.requestFocus()
+                return@setOnClickListener
+            }
+            if(interest.isEmpty()) {
+                binding.Interest.setError("Choose an interest")
+                binding.Interest.requestFocus()
+                return@setOnClickListener
+            }
+            if(location.isEmpty()){
+                binding.locationText.setError("Location is required")
+                binding.locationText.requestFocus()
+                return@setOnClickListener
+            }
+            if(!(radiogroup.checkedRadioButtonId == R.id.ideaOwner || radiogroup.checkedRadioButtonId == R.id.ideaSearcher)){
+                binding.radiogroup.requestFocus()
+                Toast .makeText(this,"Choose user type",Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             auth.currentUser?.let { it1 ->
                 database.child("Users").child(it1.uid).child("name").setValue(name)
             }
@@ -113,7 +148,7 @@ class ProfileEditActivity : AppCompatActivity() {
                 database.child("Users").child(it1.uid).child("bio").setValue(bio)
             }
             auth.currentUser?.let { it1 ->
-                database.child("Users").child(it1.uid).child("userType").setValue(radiogroup)
+                database.child("Users").child(it1.uid).child("userType").setValue(userType)
             }
             startActivity(Intent(this@ProfileEditActivity, Profile::class.java))
 

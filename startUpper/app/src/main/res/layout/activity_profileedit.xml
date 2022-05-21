@@ -185,7 +185,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:layout_marginBottom="5dp"
-                android:text="Job Idea Searcher"
+                android:text="ideaSearcher"
                 android:textAlignment="textStart" />
 
             <RadioButton
@@ -193,7 +193,7 @@
                 android:layout_width="114dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:text="Job Owner"
+                android:text="ideaOwner"
                 android:textAlignment="textStart" />
         </RadioGroup>
 

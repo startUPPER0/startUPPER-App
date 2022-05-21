@@ -13,7 +13,7 @@ class Notification : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification)
-
+/*
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigationView.setSelectedItemId(R.id.notificationBottomMenu)
 
@@ -38,6 +38,6 @@ class Notification : AppCompatActivity() {
             false
         })
 
-
+*/
     }
 }

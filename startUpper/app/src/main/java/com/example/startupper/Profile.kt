@@ -61,13 +61,14 @@ class Profile : AppCompatActivity() {
                         Log.e("basari", "basari")
                         for (z in i.children) {
                             if (currentUserId == z.key.toString()) {
-                                binding.nameProfile.text = z.child("name").getValue().toString()
+                                binding.nameProfile.text = z.child("name").value.toString()
                                 binding.surnameProfile.text =
-                                    z.child("surname").getValue().toString()
+                                    z.child("surname").value.toString()
                                 binding.email.text =
-                                    z.child("email").getValue().toString()
+                                    z.child("email").value.toString()
                                 var uri = z.child("imageUri").getValue()
                                 Picasso.get().load(uri.toString()).into(binding.imageViewProfile)
+                                binding.descripton.text = z.child("bio").value.toString()
                             }
                         }
                     }
@@ -89,7 +90,7 @@ class Profile : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.inboxBottomMenu -> {
+                /*R.id.inboxBottomMenu -> {
                     startActivity(Intent(this@Profile, Inbox::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
@@ -98,7 +99,7 @@ class Profile : AppCompatActivity() {
                     startActivity(Intent(this@Profile, Notification::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
-                }
+                }*/
             }
             false
         })

@@ -74,7 +74,7 @@ class NewBussinessActivity : AppCompatActivity() {
         }
         var businessName = binding.businessName.text.toString()
         var location = binding.location.text.toString()
-        var desc = binding.descripton.text.toString()
+        var desc = binding.description.text.toString()
         var nb = NewBusinessClass(businessName, location, desc, "")
 
         val reference = storage.reference

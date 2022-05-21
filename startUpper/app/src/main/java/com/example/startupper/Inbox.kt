@@ -11,7 +11,7 @@ class Inbox : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inbox)
-
+/*
         bottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigationView.setSelectedItemId(R.id.inboxBottomMenu)
 
@@ -36,6 +36,6 @@ class Inbox : AppCompatActivity() {
             false
         })
 
-
+*/
     }
 }

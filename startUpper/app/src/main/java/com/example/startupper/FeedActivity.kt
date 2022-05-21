@@ -146,21 +146,21 @@ class FeedActivity : AppCompatActivity() {
 
             bottomNavigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
                 when (item.itemId) {
-                    R.id.notificationBottomMenu -> {
+                   /* R.id.notificationBottomMenu -> {
                         startActivity(Intent(this@FeedActivity, Notification::class.java))
                         overridePendingTransition(0, 0)
                         return@OnNavigationItemSelectedListener true
-                    }
+                    }*/
                     R.id.profileBottomMenu -> {
                         startActivity(Intent(this@FeedActivity, Profile::class.java))
                         overridePendingTransition(0, 0)
                         return@OnNavigationItemSelectedListener true
                     }
-                    R.id.inboxBottomMenu -> {
+                   /* R.id.inboxBottomMenu -> {
                         startActivity(Intent(this@FeedActivity, Inbox::class.java))
                         overridePendingTransition(0, 0)
                         return@OnNavigationItemSelectedListener true
-                    }
+                    } */
                 }
                 false
             })
@@ -265,7 +265,7 @@ class FeedActivity : AppCompatActivity() {
                                                 var email = y.child("email").value.toString()
                                                 var image = y.child("imageUri").value.toString()
                                             //PROBLEM BU KOŞULU SİLİNCE TEKRAR TEKRAR GÖRÜYOSUN
-                                            if(!seenUsers.contains(y.key.toString())){
+                                            //if(!seenUsers.contains(y.key.toString())){
                                                 adapterUser.addUser(
                                                     UserRegisterClass(
                                                         name,
@@ -280,7 +280,7 @@ class FeedActivity : AppCompatActivity() {
                                                         ""
                                                     )
                                                 )
-                                            }
+                                            //}
 
                                         }
                                     }
