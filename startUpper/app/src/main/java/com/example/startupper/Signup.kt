@@ -70,10 +70,10 @@ class Signup : AppCompatActivity() {
             var date : String = makeDateString(day,monthh,year)
             dateButton.setText(date)
         }
-
-        var year:Int = Calendar.YEAR
-        var month:Int = Calendar.MONTH
-        var day :Int = Calendar.DAY_OF_MONTH
+        var cal = Calendar.getInstance()
+        var year:Int = cal.get(Calendar.YEAR)
+        var month:Int = cal.get(Calendar.MONTH)
+        var day :Int = cal.get((Calendar.DAY_OF_MONTH))
 
         var style =AlertDialog.THEME_HOLO_LIGHT
         dialog = DatePickerDialog(this,style,dateSetListener,year,month,day)
@@ -81,6 +81,7 @@ class Signup : AppCompatActivity() {
     }
 
     private fun openDatePicker(){
+
         dialog.show()
     }
 
