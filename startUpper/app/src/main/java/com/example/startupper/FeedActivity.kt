@@ -92,22 +92,22 @@ class FeedActivity : AppCompatActivity() {
                     var likedID = ""
                     var likedName = UserList[0].name
                     Log.e("NAME", likedName)
-                    database.child("users").get().addOnSuccessListener {
+                    database.child("Users").get().addOnSuccessListener {
                         //users
+
                         loop@ for(i in it.children){
-                            if(i.child("name").value?.equals(likedName) == true) {
+                            if(i.child("name").value?.toString().equals(likedName)) {
                                 likedID = i.key.toString()
-                                Log.e("current ID", likedID)
                                 break@loop
                             }
                         }
                         if(direction == Direction.Top) {
                             database.child("Users").child(currentUserId).
-                            child("liked").child(likedID).child(likedName).setValue("")
+                            child("liked").child(likedID).setValue(likedName)
                         }
                         if(direction == Direction.Bottom) {
                             database.child("Users").child(currentUserId).
-                            child("disliked").child(likedID).child(likedName).setValue("")
+                            child("disliked").child(likedID).setValue(likedName)
                         }
                     }
                     UserList.removeAt(0)

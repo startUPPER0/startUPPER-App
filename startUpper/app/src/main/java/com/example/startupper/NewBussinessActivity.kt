@@ -67,6 +67,11 @@ class NewBussinessActivity : AppCompatActivity() {
     }
 
     private fun createBusiness() {
+        if(businessPicture == null) {
+            binding.createBusinessImg.requestFocus()
+            Toast .makeText(this,"Choose a picture",Toast.LENGTH_SHORT).show()
+            return
+        }
         var businessName = binding.businessName.text.toString()
         var location = binding.location.text.toString()
         var desc = binding.descripton.text.toString()
