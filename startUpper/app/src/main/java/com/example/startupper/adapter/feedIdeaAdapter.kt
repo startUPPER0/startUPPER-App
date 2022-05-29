@@ -1,18 +1,16 @@
 package com.example.startupper.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.startupper.FeedActivity
 import com.example.startupper.NewBusinessClass
 import com.example.startupper.R
 import com.squareup.picasso.Picasso
 
-class feedIdeaAdapter(var feedlist: MutableList<NewBusinessClass>,var mutableList : MutableList<NewBusinessClass>) :
+class feedIdeaAdapter(var feedlist: MutableList<NewBusinessClass>) :
     RecyclerView.Adapter<feedIdeaAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -23,7 +21,7 @@ class feedIdeaAdapter(var feedlist: MutableList<NewBusinessClass>,var mutableLis
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.feedlayout, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_feedidea, parent, false)
         return ViewHolder(v)
     }
 
@@ -39,11 +37,12 @@ class feedIdeaAdapter(var feedlist: MutableList<NewBusinessClass>,var mutableLis
         holder.location.text = feed.location
         holder.desc.text = feed.description
         Picasso.get().load(feed.imageuri).into(holder.imageBusiness)
-        mutableList.add(feed)
-
     }
 
     override fun getItemCount(): Int {
         return feedlist.size
+    }
+    fun getCurrentIdea() : NewBusinessClass {
+        return feedlist[0]
     }
 }

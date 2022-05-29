@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/layout/activity_feed.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23148148148148148" />
+        <entry key="app/src/main/res/layout/activity_mybusiness.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_newbusiness.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_profileedit.xml" value="0.35260416666666666" />
@@ -35,6 +36,8 @@
         <entry key="app/src/main/res/layout/feedlayout.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/feeduserlayout.xml" value="0.39953271028037385" />
         <entry key="app/src/main/res/layout/item_chat.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/item_feeduser.xml" value="0.35260416666666666" />
+        <entry key="app/src/main/res/layout/item_interest.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/item_notification.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/newbusineeees.xml" value="0.33" />
         <entry key="app/src/main/res/layout/profiletoolbar.xml" value="0.35260416666666666" />

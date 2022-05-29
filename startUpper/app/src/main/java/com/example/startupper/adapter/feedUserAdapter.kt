@@ -6,12 +6,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.startupper.FeedActivity
 import com.example.startupper.R
 import com.example.startupper.UserRegisterClass
 import com.squareup.picasso.Picasso
 
-class feedUserAdapter(var feedUserlist: MutableList<UserRegisterClass>, var mutableList: MutableList<UserRegisterClass> ) :
+class feedUserAdapter(var feedUserlist: MutableList<UserRegisterClass>) :
     RecyclerView.Adapter<feedUserAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.userName)
@@ -22,14 +21,14 @@ class feedUserAdapter(var feedUserlist: MutableList<UserRegisterClass>, var muta
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.feeduserlayout, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_feeduser, parent, false)
         return ViewHolder(v)
     }
 
     fun addUser(feedUser: UserRegisterClass) {
         if(!feedUserlist.contains(feedUser))
             feedUserlist.add(feedUser)
-        notifyItemInserted(feedUserlist.size - 1)
+        //notifyItemInserted(feedUserlist.size)
     }
 
 
@@ -42,11 +41,14 @@ class feedUserAdapter(var feedUserlist: MutableList<UserRegisterClass>, var muta
         //holder.interest.text = user.interest
         //holder.bio.text = user.bio
         Picasso.get().load(user.profileImage).into(holder.imageView)
-        mutableList.add(user)
-
     }
+
 
     override fun getItemCount(): Int {
         return feedUserlist.size
     }
+    fun getCurrentUser() : UserRegisterClass{
+        return feedUserlist[0]
+    }
+
 }
