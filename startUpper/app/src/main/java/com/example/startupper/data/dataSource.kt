@@ -6,17 +6,7 @@ import com.example.startupper.model.chatsModel
 import com.example.startupper.model.notificationModel
 
 class dataSource {
-    fun loadNotificationModel(): MutableList<notificationModel>{
-
-        return  mutableListOf<notificationModel>(
-
-            notificationModel(R.string.not1),
-            notificationModel(R.string.not2),
-            notificationModel(R.string.not3),
-            notificationModel(R.string.not4)
-
-                )
-    }
+   
 
     fun loadChatsModel(): MutableList<chatsModel>{
         return mutableListOf<chatsModel>(

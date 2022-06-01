@@ -14,13 +14,17 @@
         <entry key="..\:/Users/lenovo/Desktop/Klasorler/githubprojects/cse234-2022-term-project-team15/startUpper/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/lenovo/Desktop/Klasorler/githubprojects/cse234-2022-term-project-team15/startUpper/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/lenovo/Desktop/Klasorler/githubprojects/cse234-2022-term-project-team15/startUpper/app/src/main/res/layout/activity_notification.xml" value="0.264" />
+        <entry key="..\:/Users/lenovo/Desktop/Klasorler/githubprojects/cse234-2022-term-project-team15/startUpper/app/src/main/res/layout/activity_poeple_liked.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/lenovo/Desktop/Klasorler/githubprojects/cse234-2022-term-project-team15/startUpper/app/src/main/res/layout/activity_profile.xml" value="0.264" />
         <entry key="..\:/Users/lenovo/Desktop/Klasorler/githubprojects/cse234-2022-term-project-team15/startUpper/app/src/main/res/layout/activity_profile2.xml" value="0.253125" />
         <entry key="..\:/Users/lenovo/Desktop/Klasorler/githubprojects/cse234-2022-term-project-team15/startUpper/app/src/main/res/layout/activity_profileedit.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/lenovo/Desktop/Klasorler/githubprojects/cse234-2022-term-project-team15/startUpper/app/src/main/res/layout/activity_signup.xml" value="0.2" />
         <entry key="..\:/Users/lenovo/Desktop/Klasorler/githubprojects/cse234-2022-term-project-team15/startUpper/app/src/main/res/layout/item_interest.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/lenovo/Desktop/Klasorler/githubprojects/cse234-2022-term-project-team15/startUpper/app/src/main/res/layout/item_notification.xml" value="0.264" />
+        <entry key="..\:/Users/lenovo/Desktop/Klasorler/githubprojects/cse234-2022-term-project-team15/startUpper/app/src/main/res/layout/item_people_liked.xml" value="0.253125" />
         <entry key="..\:/Users/lenovo/Desktop/Klasorler/githubprojects/cse234-2022-term-project-team15/startUpper/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2595" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_circle_down_24.xml" value="0.353" />
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_circle_up_24.xml" value="0.353" />
         <entry key="app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.348" />
         <entry key="app/src/main/res/drawable/ic_wave.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_wave_dark.xml" value="0.354" />
@@ -30,15 +34,18 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23148148148148148" />
         <entry key="app/src/main/res/layout/activity_mybusiness.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_newbusiness.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_people_liked.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_profileedit.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/feedlayout.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/feeduserlayout.xml" value="0.39953271028037385" />
         <entry key="app/src/main/res/layout/item_chat.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/item_feedidea.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/item_feeduser.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/item_interest.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/item_notification.xml" value="0.35260416666666666" />
+        <entry key="app/src/main/res/layout/item_people_liked.xml" value="0.2894399315946986" />
         <entry key="app/src/main/res/layout/newbusineeees.xml" value="0.33" />
         <entry key="app/src/main/res/layout/profiletoolbar.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.178125" />
