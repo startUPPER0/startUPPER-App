@@ -129,7 +129,7 @@ class FeedActivity : AppCompatActivity() {
             }
 
         })
-        manager.setStackFrom(StackFrom.Right)
+        manager.setStackFrom(StackFrom.Bottom)
         manager.setDirections(Direction.VERTICAL)
         manager.setVisibleCount(3)
         manager.setTranslationInterval(8.0f)

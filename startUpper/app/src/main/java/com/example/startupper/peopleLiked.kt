@@ -3,9 +3,12 @@ package com.example.startupper
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.startupper.adapter.myBusinessAdaptor
 import com.example.startupper.adapter.peopleLikedAdapter
+import com.example.startupper.model.peopleLikedModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -25,6 +28,8 @@ class peopleLiked : AppCompatActivity() {
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var storage: FirebaseStorage
     private lateinit var recyclerview: RecyclerView
+    private lateinit var adapter: peopleLikedAdapter
+
     private var usertype: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,11 +42,11 @@ class peopleLiked : AppCompatActivity() {
             false
         )
         recyclerview.layoutManager = linearLayoutManager
-        recyclerview.adapter = peopleLikedAdapter(mutableListOf())
         database = Firebase.database.reference
         auth = Firebase.auth
         storage = Firebase.storage
 
+        Log.e("AAAAAAAAAAAAAAAAAAAAAAAAAAA","a")
 
 
         var currentUser = auth.currentUser
@@ -53,20 +58,53 @@ class peopleLiked : AppCompatActivity() {
 
         var getData = object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                adapter = peopleLikedAdapter(mutableListOf())
+                recyclerview.adapter = adapter
                 usertype = snapshot.child("Users").child(currentUserId).child("userType").value.toString()
 
                 if (usertype =="ideaOwner") {
-                    for(i in snapshot.child("Users").child(currentUserId).)
+                    for(i in snapshot.child("Users").child(currentUserId).child("liked").children){
+                        Log.e("AAAAAAAAAAAAAAAAAAAAAAAAAAA","a")
+                        var image = snapshot.child("Users").child(i.key.toString()).child("imageUri").value.toString()
+                        var name =  snapshot.child("Users").child(i.key.toString()).child("name").value.toString()
+                        var secondary = snapshot.child("Users").child(i.key.toString()).child("interest").value.toString()
+                        Log.e("AAAAAAAAAAAAAAAAAAAAAAAAAAA","$image $name $secondary")
+
+                        adapter.addPerson(
+                            peopleLikedModel(name,secondary,image)
+                        )
+
+                    }
+
                 }
+
+
+                if (usertype =="ideaSearcher") {
+                    for(i in snapshot.child("Users").child(currentUserId).child("liked").children){
+                        var image = snapshot.child("Users").child(i.key.toString()).child("imageUri").value.toString()
+                        var name =  snapshot.child("Users").child(i.key.toString()).child("name").value.toString()
+                        var secondary = snapshot.child("Users").child(i.key.toString()).child("interest").value.toString()
+                        Log.e("AAAAAAAAAAAAAAAAAAAAAAAAAAA","$image $name $secondary")
+
+                        adapter.addPerson(
+                            peopleLikedModel(name,secondary,image)
+                        )
+
+                    }
+
+                }
+
+
+
 
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
 
         }
 
+        database.addValueEventListener(getData)
 
 
 

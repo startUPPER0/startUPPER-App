@@ -26,7 +26,6 @@ class myBusinessAdaptor(var feedlist: MutableList<NewBusinessClass>) :
     }
     fun addBusiness(business: NewBusinessClass) {
         feedlist.add(business)
-        notifyItemInserted(feedlist.size - 1)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

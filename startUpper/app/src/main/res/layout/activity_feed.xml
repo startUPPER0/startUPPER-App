@@ -20,6 +20,7 @@
     </ImageView>
 
     <com.yuyakaido.android.cardstackview.CardStackView
+
         android:id="@+id/feedStackView"
         android:layout_width="match_parent"
         android:layout_height="0dp"

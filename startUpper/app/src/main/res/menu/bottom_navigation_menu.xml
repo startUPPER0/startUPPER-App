@@ -26,13 +26,13 @@
     <item
         android:id="@+id/incomingLikesBottomMenu"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_people_24"
+        android:icon="@drawable/ic_baseline_notifications_24"
         android:title="Notification" />
 
     <item
         android:id="@+id/outgoingLikesBottomMenu"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_notifications_24"
+        android:icon="@drawable/ic_baseline_people_24"
         android:title="MyLikes" />
 
 
