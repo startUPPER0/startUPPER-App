@@ -9,15 +9,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startupper.R
 import com.example.startupper.model.notificationModel
+import com.example.startupper.model.peopleLikedModel
 import com.squareup.picasso.Picasso
 
-class notificationRecylerAdapter(private  val context : Context,
-                                 private val dataset : List<notificationModel>):
+class notificationRecylerAdapter(private val dataset : MutableList<notificationModel>):
     RecyclerView.Adapter<notificationRecylerAdapter.ItemViewHolder>(){
 
     class  ItemViewHolder(private  val view : View): RecyclerView.ViewHolder(view){
         var imageUri: ImageView = view.findViewById(R.id.notificationImage)
-        val name : TextView = view.findViewById(R.id.primaryText)
+        val name : TextView = view.findViewById(R.id.itemName)
         val email : TextView = view.findViewById(R.id.item_mail)
     }
 
@@ -27,6 +27,11 @@ class notificationRecylerAdapter(private  val context : Context,
 
         return ItemViewHolder(adapterLayout)
     }
+
+    fun addPerson(person: notificationModel) {
+        dataset.add(person)
+    }
+
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
