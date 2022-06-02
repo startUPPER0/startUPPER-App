@@ -43,12 +43,12 @@ class FeedActivity : AppCompatActivity() {
         auth = Firebase.auth
         storage = Firebase.storage
 
-        auth.currentUser?.let {
-            database.child("Users").child(it.uid).child("userType").get()
-                .addOnSuccessListener {
-                    usertype = it.value.toString()
-                }
+        var currentUser = auth.currentUser
+        if (currentUser != null) {
+            currentUserId = currentUser.uid
+
         }
+
 
         var cardStackView = findViewById<CardStackView>(R.id.feedStackView)
         val manager = CardStackLayoutManager(this, object : CardStackListener {
@@ -170,29 +170,14 @@ class FeedActivity : AppCompatActivity() {
         })
 
 
-        var currentUser = auth.currentUser
-        if (currentUser != null) {
-            currentUserId = currentUser.uid
 
-        }
         //veri okuma
         var getdata = object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
-                loop@ for (i in snapshot.children) {
-                    if (i.key.toString() == "Users") {
-                        for (z in i.children) {
-                            if (currentUserId == z.key.toString()) {
-                                usertype = z.child("userType").value.toString()
-                                if (usertype == "ideaSearcher") {
-                                    break
-                                } else
-                                    break@loop
-                            }
-                        }
-                    }
-                }
+                usertype = snapshot.child("Users").child(currentUserId).child("userType").value.toString()
+
                 if (usertype == "ideaSearcher") {
                     cardStackView.adapter = feedIdeaAdapter(mutableListOf())
                     adapterFeed = cardStackView.adapter as feedIdeaAdapter

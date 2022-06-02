@@ -29,7 +29,6 @@ class feedUserAdapter(var feedUserlist: MutableList<UserRegisterClass>) :
     fun addUser(feedUser: UserRegisterClass) {
         if(!feedUserlist.contains(feedUser))
             feedUserlist.add(feedUser)
-        //notifyItemInserted(feedUserlist.size)
     }
 
 

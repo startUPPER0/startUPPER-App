@@ -1,6 +1,5 @@
 package com.example.startupper.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,22 +7,21 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.startupper.R
-import com.example.startupper.model.notificationModel
+import com.example.startupper.model.peopleLikedModel
 import com.squareup.picasso.Picasso
 
-class notificationRecylerAdapter(private  val context : Context,
-                                 private val dataset : List<notificationModel>):
-    RecyclerView.Adapter<notificationRecylerAdapter.ItemViewHolder>(){
+class peopleLikedAdapter(private val dataset : List<peopleLikedModel>):
+    RecyclerView.Adapter<peopleLikedAdapter.ItemViewHolder>(){
 
     class  ItemViewHolder(private  val view : View): RecyclerView.ViewHolder(view){
         var imageUri: ImageView = view.findViewById(R.id.notificationImage)
         val name : TextView = view.findViewById(R.id.primaryText)
-        val email : TextView = view.findViewById(R.id.item_mail)
+        var secondary : TextView = view.findViewById(R.id.secondaryText)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val adapterLayout = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_notification, parent, false)
+            .inflate(R.layout.item_people_liked, parent, false)
 
         return ItemViewHolder(adapterLayout)
     }
@@ -31,7 +29,7 @@ class notificationRecylerAdapter(private  val context : Context,
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
         holder.name.text =  item.name
-        holder.email.text = item.email
+        holder.secondary.text = item.secondary
         Picasso.get().load(item.imageuri).into(holder.imageUri)
 
     }

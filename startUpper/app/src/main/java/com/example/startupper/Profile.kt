@@ -46,6 +46,7 @@ class Profile : AppCompatActivity() {
         auth = Firebase.auth
         showbutton = findViewById(R.id.showmyBusiness)
         storage = Firebase.storage
+
         var currentUser = auth.currentUser
         if (currentUser != null) {
             currentUserId = currentUser.uid
