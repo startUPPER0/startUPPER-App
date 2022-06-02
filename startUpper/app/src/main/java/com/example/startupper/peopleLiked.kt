@@ -21,7 +21,7 @@ class peopleLiked : AppCompatActivity() {
 
 
         bottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomNavigationView.setSelectedItemId(R.id.profileBottomMenu)
+        bottomNavigationView.setSelectedItemId(R.id.outgoingLikesBottomMenu)
 
         bottomNavigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -35,8 +35,8 @@ class peopleLiked : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.outgoingLikesBottomMenu -> {
-                    startActivity(Intent(this, peopleLiked::class.java))
+                R.id.incomingLikesBottomMenu -> {
+                    startActivity(Intent(this, Notification::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }

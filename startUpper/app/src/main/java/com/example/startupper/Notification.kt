@@ -13,9 +13,9 @@ class Notification : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification)
-/*
+
         bottomNavigationView = findViewById(R.id.bottom_navigation)
-        bottomNavigationView.setSelectedItemId(R.id.notificationBottomMenu)
+        bottomNavigationView.setSelectedItemId(R.id.incomingLikesBottomMenu)
 
         bottomNavigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -29,8 +29,8 @@ class Notification : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.inboxBottomMenu -> {
-                    startActivity(Intent(this@Notification, Inbox::class.java))
+                R.id.outgoingLikesBottomMenu -> {
+                    startActivity(Intent(this@Notification, peopleLiked::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
@@ -38,6 +38,6 @@ class Notification : AppCompatActivity() {
             false
         })
 
-*/
+
     }
 }
