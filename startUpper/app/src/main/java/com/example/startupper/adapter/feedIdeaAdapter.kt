@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.startupper.FeedActivity
 import com.example.startupper.NewBusinessClass
 import com.example.startupper.R
 import com.squareup.picasso.Picasso

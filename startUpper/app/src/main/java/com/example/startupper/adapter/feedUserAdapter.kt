@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso
 
 class feedUserAdapter(var feedUserlist: MutableList<UserRegisterClass>) :
     RecyclerView.Adapter<feedUserAdapter.ViewHolder>() {
+
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.userName)
         val surname: TextView = view.findViewById(R.id.userSurname)
@@ -38,8 +39,6 @@ class feedUserAdapter(var feedUserlist: MutableList<UserRegisterClass>) :
         holder.surname.text = user.surname
         holder.interest.text = user.interest
         holder.bio.text = user.bio
-        //holder.interest.text = user.interest
-        //holder.bio.text = user.bio
         Picasso.get().load(user.profileImage).into(holder.imageView)
     }
 

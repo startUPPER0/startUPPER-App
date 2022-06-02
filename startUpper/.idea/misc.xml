@@ -25,7 +25,11 @@
         <entry key="..\:/Users/lenovo/Desktop/Klasorler/githubprojects/cse234-2022-term-project-team15/startUpper/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2595" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_circle_down_24.xml" value="0.353" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_circle_up_24.xml" value="0.353" />
+        <entry key="app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.353" />
         <entry key="app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.348" />
+        <entry key="app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.353" />
+        <entry key="app/src/main/res/drawable/ic_baseline_people_24.xml" value="0.353" />
+        <entry key="app/src/main/res/drawable/ic_baseline_thumb_up_24.xml" value="0.353" />
         <entry key="app/src/main/res/drawable/ic_wave.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_wave_dark.xml" value="0.354" />
         <entry key="app/src/main/res/layout/activity_chats.xml" value="0.35260416666666666" />

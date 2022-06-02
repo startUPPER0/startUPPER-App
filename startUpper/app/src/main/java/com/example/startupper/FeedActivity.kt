@@ -76,6 +76,8 @@ class FeedActivity : AppCompatActivity() {
                         if (direction == Direction.Top) {
                             database.child("Users").child(currentUserId).child("liked")
                                 .child(likedID).child(likedBusiness).setValue("")
+                            database.child("Users").child(likedID).child("peopleWhoLikedMe")
+                                .child(likedBusiness).child(currentUserId).setValue("")
                             cardStackView.adapter?.notifyDataSetChanged()
 
                         }
@@ -99,6 +101,8 @@ class FeedActivity : AppCompatActivity() {
                         if (direction == Direction.Top) {
                             database.child("Users").child(currentUserId).child("liked")
                                 .child(likedID).setValue(likedName)
+                            database.child("Users").child(likedID).child("peopleWhoLikedMe")
+                                .child(currentUserId).setValue("")
                             cardStackView.adapter?.notifyDataSetChanged()
                         }
                         if (direction == Direction.Bottom) {
@@ -146,21 +150,21 @@ class FeedActivity : AppCompatActivity() {
 
         bottomNavigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                /* R.id.notificationBottomMenu -> {
-                     startActivity(Intent(this@FeedActivity, Notification::class.java))
-                     overridePendingTransition(0, 0)
-                     return@OnNavigationItemSelectedListener true
-                 }*/
+                R.id.incomingLikesBottomMenu -> {
+                    startActivity(Intent(this,Notification::class.java))
+                    overridePendingTransition(0, 0)
+                    return@OnNavigationItemSelectedListener true
+                }
                 R.id.profileBottomMenu -> {
                     startActivity(Intent(this@FeedActivity, Profile::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
-                /* R.id.inboxBottomMenu -> {
-                     startActivity(Intent(this@FeedActivity, Inbox::class.java))
-                     overridePendingTransition(0, 0)
-                     return@OnNavigationItemSelectedListener true
-                 } */
+                R.id.outgoingLikesBottomMenu -> {
+                    startActivity(Intent(this, peopleLiked::class.java))
+                    overridePendingTransition(0, 0)
+                    return@OnNavigationItemSelectedListener true
+                }
             }
             false
         })
@@ -199,18 +203,20 @@ class FeedActivity : AppCompatActivity() {
                                     if (currentUserId != y.key.toString()) {
                                         var hasSeen = false
 
-                                        for(k in snapshot.child("Users").child(currentUserId).child("liked").children) {
+                                        for (k in snapshot.child("Users").child(currentUserId)
+                                            .child("liked").children) {
 
-                                            if(k.key.toString() == y.key.toString()) {
+                                            if (k.key.toString() == y.key.toString()) {
                                                 hasSeen = true
                                             }
                                         }
-                                        for(k in snapshot.child("Users").child(currentUserId).child("disliked").children) {
-                                            if(k.key.toString() == y.key.toString())
+                                        for (k in snapshot.child("Users").child(currentUserId)
+                                            .child("disliked").children) {
+                                            if (k.key.toString() == y.key.toString())
                                                 hasSeen = true
                                         }
 
-                                        if(!hasSeen){
+                                        if (!hasSeen) {
                                             var businessname =
                                                 z.child("businessName").value.toString()
                                             var location =
@@ -242,40 +248,46 @@ class FeedActivity : AppCompatActivity() {
                     for (y in snapshot.child("Users").children) {
                         if (currentUserId != y.key.toString()) {
                             var hasSeen = false
+                            if (y.child("userType").value != "ideaOwner") {
+                                for (k in snapshot.child("Users").child(currentUserId)
+                                    .child("liked").children) {
 
-                            for(k in snapshot.child("Users").child(currentUserId).child("liked").children) {
-
-                                if(k.key.toString() == y.key.toString()) {
-                                    hasSeen = true
+                                    if (k.key.toString() == y.key.toString()) {
+                                        hasSeen = true
+                                    }
+                                }
+                                for (k in snapshot.child("Users").child(currentUserId)
+                                    .child("disliked").children) {
+                                    if (k.key.toString() == y.key.toString())
+                                        hasSeen = true
+                                }
+                                if (!hasSeen) {
+                                    var name = y.child("name").value.toString()
+                                    var surname = y.child("surname").value.toString()
+                                    var location = y.child("location").value.toString()
+                                    var dob = y.child("date").value.toString()
+                                    var email = y.child("email").value.toString()
+                                    var image = y.child("imageUri").value.toString()
+                                    var bio = y.child("bio").value.toString()
+                                    var interest = y.child("interest").value.toString()
+                                    adapterUser.addUser(
+                                        UserRegisterClass(
+                                            name,
+                                            surname,
+                                            email,
+                                            dob,
+                                            location,
+                                            "0000",
+                                            "000",
+                                            interest,
+                                            image,
+                                            bio
+                                        )
+                                    )
                                 }
                             }
-                            for(k in snapshot.child("Users").child(currentUserId).child("disliked").children) {
-                                if(k.key.toString() == y.key.toString())
-                                    hasSeen = true
-                            }
-                            if(!hasSeen) {
-                                var name = y.child("name").value.toString()
-                                var surname = y.child("surname").value.toString()
-                                var location = y.child("location").value.toString()
-                                var dob = y.child("date").value.toString()
-                                var email = y.child("email").value.toString()
-                                var image = y.child("imageUri").value.toString()
-                                var bio = y.child("bio").value.toString()
-                                adapterUser.addUser(
-                                    UserRegisterClass(
-                                        name,
-                                        surname,
-                                        email,
-                                        dob,
-                                        location,
-                                        "0000",
-                                        "000",
-                                        "",
-                                        image,
-                                        bio
-                                    )
-                                )
-                            }
+
+
                         }
                     }
                 }

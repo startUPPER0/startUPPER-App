@@ -7,8 +7,8 @@
 
 
     <androidx.cardview.widget.CardView
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="60dp"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:layout_width="match_parent"
@@ -43,10 +43,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_weight="0.05">
+
                 <TextView
-                    android:gravity="center"
-                    android:text="userName"
-                    android:textSize="20sp"
                     android:id="@+id/userName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -55,9 +53,13 @@
                     android:layout_marginRight="8dp"
                     android:layout_marginBottom="4dp"
                     android:layout_weight="0.05"
+                    android:gravity="center"
+                    android:text="userName"
                     android:textColor="@color/black"
-                    android:textStyle="bold">
-                </TextView>
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textAlignment="textEnd"></TextView>
+
                 <TextView
                     android:gravity="center"
                     android:text="userSurname"
@@ -71,7 +73,8 @@
                     android:layout_marginBottom="4dp"
                     android:layout_weight="0.05"
                     android:textColor="@color/black"
-                    android:textStyle="bold">
+                    android:textStyle="bold"
+                    android:textAlignment="textStart">
                 </TextView>
             </LinearLayout>
 

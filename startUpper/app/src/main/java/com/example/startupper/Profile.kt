@@ -39,11 +39,12 @@ class Profile : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         appbar = findViewById(R.id.profiletoolbar)
+        appbar.title = "Profile"
         setSupportActionBar(appbar)
+
         database = Firebase.database.reference
         auth = Firebase.auth
         showbutton = findViewById(R.id.showmyBusiness)
-
         storage = Firebase.storage
         var currentUser = auth.currentUser
         if (currentUser != null) {
@@ -55,6 +56,7 @@ class Profile : AppCompatActivity() {
             userType = it.child("userType").value.toString()
             if(userType == "ideaSearcher") {
                 binding.startNewBussinessBT.visibility = View.GONE
+                binding.showmyBusiness.visibility = View.GONE
             }
         }
 
@@ -101,16 +103,16 @@ class Profile : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
-                /*R.id.inboxBottomMenu -> {
-                    startActivity(Intent(this@Profile, Inbox::class.java))
+                R.id.incomingLikesBottomMenu -> {
+                    startActivity(Intent(this@Profile,Notification::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.notificationBottomMenu -> {
-                    startActivity(Intent(this@Profile, Notification::class.java))
+                R.id.outgoingLikesBottomMenu -> {
+                    startActivity(Intent(this@Profile, peopleLiked::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
-                }*/
+                }
             }
             false
         })
