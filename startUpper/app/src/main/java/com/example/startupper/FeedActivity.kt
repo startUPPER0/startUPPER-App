@@ -78,6 +78,7 @@ class FeedActivity : AppCompatActivity() {
                                 .child(likedID).child(likedBusiness).setValue("")
                             database.child("Users").child(likedID).child("peopleWhoLikedMe")
                                 .child(likedBusiness).child(currentUserId).setValue("")
+
                             cardStackView.adapter?.notifyDataSetChanged()
 
                         }
@@ -190,15 +191,23 @@ class FeedActivity : AppCompatActivity() {
 
                                         for (k in snapshot.child("Users").child(currentUserId)
                                             .child("liked").children) {
-
-                                            if (k.key.toString() == y.key.toString()) {
-                                                hasSeen = true
+                                            for (j in k.children){
+                                                if (z.key.toString() == j.key.toString()) {
+                                                    hasSeen = true
+                                                }
                                             }
+
+
                                         }
                                         for (k in snapshot.child("Users").child(currentUserId)
                                             .child("disliked").children) {
-                                            if (k.key.toString() == y.key.toString())
-                                                hasSeen = true
+                                            for (j in k.children){
+                                                if (z.key.toString() == j.key.toString()) {
+                                                    hasSeen = true
+                                                }
+                                            }
+
+
                                         }
 
                                         if (!hasSeen) {

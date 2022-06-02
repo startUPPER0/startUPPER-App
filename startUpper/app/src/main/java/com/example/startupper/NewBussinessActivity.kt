@@ -64,6 +64,10 @@ class NewBussinessActivity : AppCompatActivity() {
             createBusiness()
         }
 
+        binding.cancelNewBusiness.setOnClickListener {
+            startActivity(Intent(this, Profile::class.java))
+        }
+
     }
 
     private fun createBusiness() {

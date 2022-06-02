@@ -38,15 +38,13 @@ class peopleLiked : AppCompatActivity() {
 
         recyclerview = findViewById(R.id.peopleLikedRW)
         val linearLayoutManager = LinearLayoutManager(
-            this,LinearLayoutManager.VERTICAL,
+            this, LinearLayoutManager.VERTICAL,
             false
         )
         recyclerview.layoutManager = linearLayoutManager
         database = Firebase.database.reference
         auth = Firebase.auth
         storage = Firebase.storage
-
-        Log.e("AAAAAAAAAAAAAAAAAAAAAAAAAAA","a")
 
 
         var currentUser = auth.currentUser
@@ -56,22 +54,24 @@ class peopleLiked : AppCompatActivity() {
         }
 
 
-        var getData = object : ValueEventListener{
+        var getData = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 adapter = peopleLikedAdapter(mutableListOf())
                 recyclerview.adapter = adapter
-                usertype = snapshot.child("Users").child(currentUserId).child("userType").value.toString()
+                usertype =
+                    snapshot.child("Users").child(currentUserId).child("userType").value.toString()
+                if (usertype == "ideaOwner") {
+                    for (i in snapshot.child("Users").child(currentUserId)
 
-                if (usertype =="ideaOwner") {
-                    for(i in snapshot.child("Users").child(currentUserId).child("liked").children){
-                        Log.e("AAAAAAAAAAAAAAAAAAAAAAAAAAA","a")
-                        var image = snapshot.child("Users").child(i.key.toString()).child("imageUri").value.toString()
-                        var name =  snapshot.child("Users").child(i.key.toString()).child("name").value.toString()
-                        var secondary = snapshot.child("Users").child(i.key.toString()).child("interest").value.toString()
-                        Log.e("AAAAAAAAAAAAAAAAAAAAAAAAAAA","$image $name $secondary")
-
+                        .child("liked").children) {
+                        var image = snapshot.child("Users").child(i.key.toString())
+                            .child("imageUri").value.toString()
+                        var name = "Name : " + snapshot.child("Users").child(i.key.toString())
+                            .child("name").value.toString()
+                        var secondary = "Interest : " + snapshot.child("Users").child(i.key.toString())
+                            .child("interest").value.toString()
                         adapter.addPerson(
-                            peopleLikedModel(name,secondary,image)
+                            peopleLikedModel(name, secondary, image)
                         )
 
                     }
@@ -79,22 +79,29 @@ class peopleLiked : AppCompatActivity() {
                 }
 
 
-                if (usertype =="ideaSearcher") {
-                    for(i in snapshot.child("Users").child(currentUserId).child("liked").children){
-                        var image = snapshot.child("Users").child(i.key.toString()).child("imageUri").value.toString()
-                        var name =  snapshot.child("Users").child(i.key.toString()).child("name").value.toString()
-                        var secondary = snapshot.child("Users").child(i.key.toString()).child("interest").value.toString()
-                        Log.e("AAAAAAAAAAAAAAAAAAAAAAAAAAA","$image $name $secondary")
+                if (usertype == "ideaSearcher") {
 
-                        adapter.addPerson(
-                            peopleLikedModel(name,secondary,image)
-                        )
+                    //each liked user
+                    for (i in snapshot.child("Users").child(currentUserId)
+                        .child("liked").children) {
+                        //each of the liked user's ideas
+                        for (k in snapshot.child("Users").child(currentUserId).child("liked")
+                            .child(i.key.toString()).children) {
+                            var image = snapshot.child("feeds").child(i.key.toString())
+                                .child(k.key.toString()).child("imageUri").value.toString()
+                            var secondary = "Owner : " + snapshot.child("Users").child(i.key.toString())
+                                .child("name").value.toString()//
+                            var businessName = "Idea : " + k.key.toString()
+
+                            adapter.addPerson(
+                                peopleLikedModel(businessName, secondary, image)
+                            )
+                        }
+
 
                     }
 
                 }
-
-
 
 
             }
@@ -123,7 +130,7 @@ class peopleLiked : AppCompatActivity() {
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.profileBottomMenu -> {
-                    startActivity(Intent(this,Profile::class.java))
+                    startActivity(Intent(this, Profile::class.java))
                     overridePendingTransition(0, 0)
                     return@OnNavigationItemSelectedListener true
                 }
